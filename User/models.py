@@ -18,4 +18,4 @@ def create_user_seller(sender, instance, created, **kwargs):
 def save_user_seller(sender, instance, **kwargs):
     instance.seller.save()
 
-# Create your models here.
+#Buyer will just be a default user!
