@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/buying" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/database" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/items" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/marketplace" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/user" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.8 (djangoexperiment)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
