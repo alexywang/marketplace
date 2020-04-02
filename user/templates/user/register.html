@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    
+    <body>
+   
+        <form method="POST" action="{% url 'register' %}">
+            {%csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit" value="Create New Account">
+        </form>
+         <h1>{{user_form.errors}} and {{profile_form.errors}}</h1>
+    </body>
+
+</html>

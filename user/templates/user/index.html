@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Hello</h1>
+        {% if user.is_authenticated %}
+            <h1>Your username is {{user.username}}</h1>
+        {%endif%}
+    </body>
+</html>
