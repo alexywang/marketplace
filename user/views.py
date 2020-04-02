@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
-from user.forms import UserProfileForm,UserForm
+from user.forms import UserProfileForm, UserForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+import sys
 
 def index(request):
     context = {}
@@ -43,15 +44,22 @@ def register(request):
 def do_login(request):
     context = {}
     if request.method=='POST':
-        form=AuthenticationForm(request.POST)
+        print('Got POST')
+        form=AuthenticationForm(data=request.POST)
         if form.is_valid():
-            user = authenticate(form.cleaned_data.get('username'),form.cleaned_data.get('password'))
+            print(form.cleaned_data['username'])
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
+                print('Login success')
                 login(request,user)
                 return redirect('index')
             else:
+                print('Login fail')
                 form.add_error(None,'Unable to login')
+        else:
+            print('form invalid')
     else:
+        print('Serving form')
         form=AuthenticationForm()
     context['form']=form
     return render(request,'user/login.html',context)
