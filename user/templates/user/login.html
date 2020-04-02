@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<h1>Login</h1>
+<div>{{ form.non_field_errors }}</div>
+<form action="{% url 'login'%}" method="POST">
+    {% csrf_token %}
+    <p>
+     {{form.as_p}}
+    <p>
+      <input type="submit" value="Login" />
+    </p>
+</form>
+

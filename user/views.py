@@ -1,10 +1,16 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from user.forms import UserProfileForm,UserForm
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 def index(request):
     context = {}
+    if request.user.is_authenticated:
+        username=request.user.username
+    else:
+        username='not logged in'
+
+    context['username']=username
     return render(request,'user/index.html',context)
 
 
@@ -33,6 +39,27 @@ def register(request):
         
     context={'user_form': user_form,'profile_form': profile_form}
     return render(request,'user/register.html',context)
+
+def do_login(request):
+    context = {}
+    if request.method=='POST':
+        form=AuthenticationForm(request.POST)
+        if form.is_valid():
+            user = authenticate(form.cleaned_data.get('username'),form.cleaned_data.get('password'))
+            if user is not None:
+                login(request,user)
+                return redirect('index')
+            else:
+                form.add_error(None,'Unable to login')
+    else:
+        form=AuthenticationForm()
+    context['form']=form
+    return render(request,'user/login.html',context)
+
+def do_logout(request):
+    logout(request)
+    return redirect('login')
+    
             
             
             
