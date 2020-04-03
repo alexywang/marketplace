@@ -12,6 +12,10 @@
     <p>
       <input type="submit" value="Login" />
     </p>
+    {%if request.GET.next%}
+      <input type="hidden" name="next" value="{{request.GET.next}}">
+    {%endif%}
 </form>
 <a href="{% url 'register'%}">Register</a>
+
 </body>

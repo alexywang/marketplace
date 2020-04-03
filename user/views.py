@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 from user.forms import UserProfileForm, UserForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -44,15 +44,15 @@ def register(request):
 def do_login(request):
     context = {}
     if request.method=='POST':
-        print('Got POST')
         form=AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            print(form.cleaned_data['username'])
+        if form.is_valid(): 
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
-                print('Login success')
                 login(request,user)
-                return redirect('index')
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next')) 
+                else:   
+                    return redirect('index')
             else:
                 print('Login fail')
                 form.add_error(None,'Unable to login')
@@ -72,10 +72,5 @@ def do_logout(request):
             
             
 
-            
-
-
-
-#https://stackoverflow.com/questions/1727564/how-to-create-a-userprofile-form-in-django-with-first-name-last-name-modificati
-#this all needs to be finished 
+    
  
