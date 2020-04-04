@@ -7,6 +7,8 @@
         <h1>Hello</h1>
         {% if user.is_authenticated %}
             <h1>Your username is {{user.username}}</h1>
+            <h2><a href="{%url 'logout'%}">Logout</a></h2></h1>
         {%endif%}
+
     </body>
 </html>
