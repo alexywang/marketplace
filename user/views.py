@@ -58,7 +58,7 @@ def register(request):
             # user=authenticate(username=username,password=password)
             # login(request,user)
 
-            return HttpResponse('Check your email for the activation link.')
+            return render(request,'user/must_activate.html')
     else:
         user_form =UserForm()
         profile_form=UserProfileForm()
@@ -75,7 +75,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        return HttpResponse('Thank you for registering, you can now login to your account')
+        return render(request,'user/email_landing.html')
     else:
         return HttpResponse('Activation link is invalid.')
 
@@ -97,6 +97,7 @@ def do_login(request):
                 form.add_error(None,'Unable to login')
     else:
         form=AuthenticationForm()
+    
     context['form']=form
     return render(request,'user/login.html',context)
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>My Items</title>
+    </head>
+    
+    <body>
+        <h1>My Items</h1>
+        {%if not items %}
+            <h1>You have not posted any items!</h1>
+        {% else %}
+            {% for item in items %}
+                <section>
+                    <li>Name: {{item.name}}</li>
+                    <li>description: {{item.description}}</li>
+                    <li>Price: ${{item.price}}</li>
+                    <li>Quantity: {{item.quantity}}</li>
+                    
+                    {% if item.image %}
+                    <li>Image here </li>
+                    {% endif %}
+
+                </section>
+            {% endfor %}
+        {% endif %}
+    </body>
+
+</html>

@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
-
-</html>
     <head>
         <meta charset="UTF-8">
+        <title>Add Item</title>
     </head>
+    
     <body>
-        <p>ADD ITEM {{user.username}}</p>
+        <h1>Add Item</h1>
+        <form method="POST" action="{% url 'add_item' %}">
+            {%csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add Item">
+        </form>
+         <h1>Errors {{form.errors}}</h1>
     </body>
 
 </html>
