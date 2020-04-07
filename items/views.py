@@ -9,7 +9,7 @@ from .models import *
 def add_item(request):
 	context={}
 	if request.method=='POST':
-		form=ItemForm(data=request.POST)
+		form=ItemForm(request.POST,request.FILES)
 		if form.is_valid():
 			item=form.save(commit=False)
 			item.seller= request.user.userprofile
@@ -29,3 +29,4 @@ def my_items(request):
 	items = Item.objects.filter(seller=myprofile)
 	context['items']=items
 	return render(request,'items/my_items.html',context)
+

@@ -11,14 +11,14 @@
             <h1>You have not posted any items!</h1>
         {% else %}
             {% for item in items %}
-                <section>
-                    <li>Name: {{item.name}}</li>
+                <section style="padding: 20px;"> 
+                    <li><b>Name: {{item.name}}</b></li>
                     <li>description: {{item.description}}</li>
                     <li>Price: ${{item.price}}</li>
                     <li>Quantity: {{item.quantity}}</li>
                     
                     {% if item.image %}
-                    <li>Image here </li>
+                    <img src="{{item.image.url}}">
                     {% endif %}
 
                 </section>

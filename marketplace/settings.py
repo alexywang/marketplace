@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -133,3 +134,5 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 LOGIN_URL = '/user/login'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'marketplace/media')
