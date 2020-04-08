@@ -4,10 +4,14 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <h1>Hello</h1>
+        <h1>Welcome</h1>
         {% if user.is_authenticated %}
-            <h1>Your username is {{user.username}}</h1>
-            <h2><a href="{%url 'logout'%}">Logout</a></h2></h1>
+            <h1>Your username is: {{user.username}}</h1>
+            <h2><a href="{%url 'my_items'%}">My Items For Sale</a></h2>
+            <h2><a href="{%url 'add_item'%}">Add Item</a></h2>
+            <h2><a href="{%url 'logout'%}">Logout</a></h2>
+        {%else%}
+            <h2><a href="{%url 'login'%}">Login</a></h2>
         {%endif%}
 
     </body>
