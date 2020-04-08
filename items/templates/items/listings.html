@@ -10,6 +10,7 @@
         {%else%}
             {%for item in items%}
                 <section style="padding: 20px;">
+                    <li><b>Seller: </b> {{item.seller.user.username}}</li>
                     <li><b>Name: {{item.name}}</b></li>
                         <li>description: {{item.description}}</li>
                         <li>Price: ${{item.price}}</li>

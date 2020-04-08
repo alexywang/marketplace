@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ItemForm
+from user.models import UserProfile
 from .models import *
 from operator import attrgetter
 
@@ -40,8 +41,8 @@ def my_items(request):
 # Return all listed items for news feed. Sorting/Filtering should be handled on front end.
 def all_items(request):
 	context={}
-	items = sorted(Item.objects.all(), key=attrgetter('post_date'), reverse=True)
-	context['item_listings'] = items
+	items = Item.objects.all()
+	context['items'] = items
 
 	return render(request, 'items/listings.html', context)
 
