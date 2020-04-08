@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Listings</title>
+    </head>
+    <body>
+        {%if not items%}
+            There are currently no listings.
+        {%else%}
+            {%for item in items%}
+                <section style="padding: 20px;">
+                    <li><b>Name: {{item.name}}</b></li>
+                        <li>description: {{item.description}}</li>
+                        <li>Price: ${{item.price}}</li>
+                        <li>Quantity: {{item.quantity}}</li>
+
+                        {% if item.image %}
+                        <img src="{{item.image.url}}" width="200px" height="200px">
+                        {% endif %}
+                </section>
+
+            {%endfor%}
+        {%endif%}
+    </body>
 </html>
