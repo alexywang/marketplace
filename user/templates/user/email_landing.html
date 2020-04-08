@@ -4,7 +4,11 @@
         <meta charset="UTF-8">
     </head>
     <body>
+        {%include 'navbar.html'%}
+        {%include 'bootstrap/bootstrap.html'%}
+
         <p>Thank you for registering, you can now login to your account</p>
         <a href="{% url 'login' %}"> Login </a>
+
     </body>
 </html>

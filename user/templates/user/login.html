@@ -3,6 +3,8 @@
 <meta charset="UTF-8"
 </head>
 <body>
+        {%include 'navbar.html'%}
+        {%include 'bootstrap/bootstrap.html'%}
 <h1>Login</h1>
 <div>{{ form.non_field_errors }}</div>
 <form action="{% url 'login'%}" method="POST">

@@ -5,7 +5,8 @@
     </head>
     
     <body>
-   
+        {%include 'navbar.html'%}
+        {%include 'bootstrap/bootstrap.html'%}
         <form method="POST" action="{% url 'register' %}">
             {%csrf_token %}
             {{ user_form.as_p }}

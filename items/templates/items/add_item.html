@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,6 +7,8 @@
     </head>
     
     <body>
+        {%include 'navbar.html'%}
+        {%include 'bootstrap/bootstrap.html'%}
         <h1>Add Item</h1>
         <form method="POST" action="{% url 'add_item' %}" enctype="multipart/form-data">
             {%csrf_token %}
