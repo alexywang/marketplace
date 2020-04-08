@@ -4,16 +4,31 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <h1>Welcome</h1>
-        {% if user.is_authenticated %}
-            <h1>Your username is: {{user.username}}</h1>
-            <h2><a href="{%url 'my_items'%}">My Items For Sale</a></h2>
-            <h2><a href="{%url 'add_item'%}">Add Item</a></h2>
-            <h2><a href="{%url 'logout'%}">Logout</a></h2>
-            <h2><a href="{%url 'listings'%}">Listings</a></h2>
+        {%include 'navbar.html'%}
+        <h1>Welcome {%if user.is_authenticated %} {{user.username}} {%endif%}</h1>
+
+        {%if not listings%}
+            There are currently no listings.
         {%else%}
-            <h2><a href="{%url 'login'%}">Login</a></h2>
+            {%for item in listings%}
+                <section style="padding: 20px;">
+                    <li><b>Seller: </b> {{item.seller.user.username}}</li>
+                    <li><b>Name: {{item.name}}</b></li>
+                        <li>description: {{item.description}}</li>
+                        <li>Price: ${{item.price}}</li>
+                        <li>Quantity: {{item.quantity}}</li>
+
+                        {% if item.image %}
+                        <img src="{{item.image.url}}" width="200px" height="200px">
+                        {% endif %}
+                </section>
+
+            {%endfor%}
         {%endif%}
 
+
+
+
+    {%include 'bootstrap/bootstrap.html'%}
     </body>
 </html>

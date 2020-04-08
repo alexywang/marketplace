@@ -38,11 +38,4 @@ def my_items(request):
 	context['items']=items
 	return render(request,'items/my_items.html',context)
 
-# Return all listed items for news feed. Sorting/Filtering should be handled on front end.
-def all_items(request):
-	context={}
-	items = Item.objects.all()
-	context['items'] = items
-
-	return render(request, 'items/listings.html', context)
 

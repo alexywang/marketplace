@@ -10,6 +10,8 @@ from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+
+from items.models import Item
 import sys
 
 def index(request):
@@ -20,6 +22,9 @@ def index(request):
         username='not logged in'
 
     context['username']=username
+    context['listings']=Item.objects.all()
+
+
     return render(request,'user/index.html',context)
 
 
