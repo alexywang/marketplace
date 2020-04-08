@@ -10,16 +10,22 @@ def add_item(request):
 	context={}
 	if request.method=='POST':
 		form=ItemForm(request.POST,request.FILES)
-		if form.is_valid():
+	
+		if form.is_valid() :
 			item=form.save(commit=False)
-			item.seller= request.user.userprofile
+			item.seller = request.user.userprofile
 			item.save()
+			form.save_m2m()
+   
+   
 			return redirect('my_items')
 		
 	else:
 		form=ItemForm()
 		context['form']=form
+	
 	return render(request,'items/add_item.html',context)
+
 
 @login_required
 def my_items(request):

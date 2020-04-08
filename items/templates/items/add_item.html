@@ -10,6 +10,7 @@
         <form method="POST" action="{% url 'add_item' %}" enctype="multipart/form-data">
             {%csrf_token %}
             {{ form.as_p }}
+            {{category_form.as_p}}
             <input type="submit" value="Add Item">
         </form>
          <h1> {{form.errors}}</h1>
