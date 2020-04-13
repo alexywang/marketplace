@@ -1,20 +1,19 @@
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Add Item</title>
+        <title>Edit Item</title>
     </head>
     
     <body>
         {%include 'navbar.html'%}
         {%include 'bootstrap/bootstrap.html'%}
-        <h1>Add Item</h1>
-        <form method="POST" action="{% url 'add_item' %}" enctype="multipart/form-data">
+        
+        <h1>Edit Item</h1>
+        <form method="POST" enctype="multipart/form-data">
             {%csrf_token %}
             {{ form.as_p }}
-          
-            <input type="submit" value="Add Item">
+            <input type="submit" value="Edit Item">
         </form>
          <h1> {{form.errors}}</h1>
     </body>

@@ -1,9 +1,10 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404,reverse,HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import ItemForm
 from user.models import UserProfile
 from .models import *
 from operator import attrgetter
+from django.views.generic import UpdateView
 
 
 
@@ -27,6 +28,32 @@ def add_item(request):
 		context['form']=form
 	
 	return render(request,'items/add_item.html',context)
+
+ 
+@login_required	
+def edit_item(request,pk=None): 
+    item = get_object_or_404(Item,pk=pk)
+    context={}
+    
+    if item.seller==request.user.userprofile:
+        
+        if request.method=='POST':
+            form=ItemForm(data=request.POST,files=request.FILES,instance=item)
+			
+            if form.is_valid():
+                form.save(commit=False)
+                form.save()
+                form.save_m2m()
+                return redirect('my_items')
+        else:
+            form=ItemForm(instance=item)
+            context['form']=form
+            return render(request,'items/edit_item.html',context)
+    else:
+        return redirect('my_items')
+            
+        
+
 
 
 @login_required
