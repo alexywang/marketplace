@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Delete Item</title>
+    </head>
+    
+    <body>
+        {%include 'navbar.html'%}
+        {%include 'bootstrap/bootstrap.html'%}
+        
+        <h1>Delete Item</h1>
+       
+        {% if item %}
+        <section style="padding: 20px;"> 
+            <li><b>Name: {{item.name}}</b></li>
+            <li>description: {{item.description}}</li>
+            <li>Price: ${{item.price}}</li>
+            <li>Quantity: {{item.quantity}}</li>
+           
+           
+            {% for category in item.category.all %}
+                <li> Category: {{category.name}}</li>
+            {% endfor %}
+           
+            {% if item.image %}
+            <img src="{{item.image.url}}" width="200px" height="200px">
+            {% endif %}
+           
+        </section>  
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {%csrf_token %}
+             Are you sure?
+            <input type="checkbox" value="confirm" name="confirm" required>
+            <input type="submit" value="Delete Item">
+        </form>
+        
+    </body>
+
+</html>
