@@ -46,7 +46,7 @@ class JSONTestCase(TestCase):
         # for item in items:
         #     print(type(serialize('json', [item])))
 
-        item_json = query_to_json(items)
+        item_json = query_to_json(items, exclude_fields="password")
         print(item_json)
         self.assertTrue(1+1==2)
     #TODO: Finish test case
