@@ -24,6 +24,7 @@
                         <li> Category: {{category.name}}</li>
                     {% endfor %}
                    <li><a href="{% url 'edit_item' pk=item.item_id %}">Edit Item</a></li> 
+                   <li><a href="{% url 'delete_item' pk=item.item_id %}">Delete Item</a></li> 
                     
                     {% if item.image %}
                     <img src="{{item.image.url}}" width="200px" height="200px">

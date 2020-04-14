@@ -5,6 +5,10 @@ import items.models
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     buyer  = models.ForeignKey(user.models.UserProfile, on_delete=models.SET_NULL, null=True) 
-    items = models.ManyToManyField(items.models.Item)
+    shipping_address=models.TextField(blank=True)
     date = models.DateField()
+    paid = models.BooleanField(default=False)
+    
+    items = models.ManyToManyField(items.models.Item)
+    
 

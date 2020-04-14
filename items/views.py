@@ -53,7 +53,22 @@ def edit_item(request,pk=None):
         return redirect('my_items')
             
         
-
+@login_required	
+def delete_item(request,pk=None): 
+    item = get_object_or_404(Item,pk=pk)
+    context={}
+    
+    if item.seller==request.user.userprofile:
+        
+        if request.method=='POST' and 'confirm' in request.POST:
+            item.delete()
+            return redirect('my_items')
+        else:
+            context['item']=item
+            return render(request,'items/delete_item.html',context)
+    else:
+        return redirect('my_items')
+            
 
 
 @login_required
