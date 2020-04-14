@@ -10,8 +10,10 @@ from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.core import serializers
 
 from items.models import Item
+import json
 import sys
 
 def index(request):
@@ -22,10 +24,12 @@ def index(request):
         username='not logged in'
 
     context['username']=username
-    context['listings']=Item.objects.all()
+    context['items'] = Item.objects.all()
+    # context['listings']=serializers.serialize('json', Item.objects.all())
+    # context_json = json.dumps(context)
 
-
-    return render(request,'user/index.html',context)
+    return render(request,'user/index.html', context)
+    # return render(request, 'user/index.html', {'context': context_json})
 
 
 def register(request):
@@ -109,7 +113,9 @@ def do_login(request):
 def do_logout(request):
     logout(request)
     return redirect('login')
-    
+
+
+
 
             
 

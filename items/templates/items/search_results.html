@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+    {%include 'bootstrap/bootstrap.html'%}
+    {%include 'navbar.html'%}
+
+    {%if not items%}
+    There are no listings that match your search.
+
+    {%else%}
+    <h1>Search Results for <font color="Blue">"{{query}}"</font></h1>
+
+    {%include 'display_items.html'%}
+
+    {%endif%}
+</body>
+</html>

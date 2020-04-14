@@ -66,3 +66,25 @@ def my_items(request):
 	return render(request,'items/my_items.html',context)
 
 
+def search_item(request):
+	context = {}
+	query = request.GET['q']
+	items = Item.objects.filter(name__contains=query)
+	context['items']=items
+	context['query'] = query
+	return render(request, 'items/search_results.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

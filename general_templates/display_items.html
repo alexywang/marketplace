@@ -1,0 +1,30 @@
+<body>
+    <section id="listings" class="container">
+            <div class="row">
+                    {%for item in items%}
+                        <div class="card" style="width:18rem; margin:10px;">
+                            {% if item.image %}
+                                <img class="card-img-top" src="{{item.image.url}}" width="300px" height="200px">
+                            {%else%}
+                                <img class="card-img-top" src="#" width="300px" height="200px">
+                            {%endif%}
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.name}}</h5>
+
+                                <p class="card-text">
+                                <strong> {{item.seller.user.username}} </strong><br>
+                                {{item.description}}
+                                </p>
+
+
+                                <button class="btn btn-primary" onclick="">Add to Cart</button>
+                                <button class="btn" onclick=""> More </button>
+
+                                </p>
+                            </div>
+                        </div>
+
+                    {%endfor%}
+            </div>
+        </section>
+</body>
