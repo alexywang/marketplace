@@ -23,4 +23,5 @@ urlpatterns = [
     path('buying/',include('buying.urls')),
     path('items/',include('items.urls')),
     path('admin/', admin.site.urls),
+    path('chat/',include('chat.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #this is only for development
