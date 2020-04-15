@@ -13,7 +13,6 @@ from django.http import HttpResponse
 from django.core import serializers
 
 from items.models import Item
-from buying.models import Cart
 
 import json
 import sys
@@ -61,10 +60,6 @@ def register(request):
             to_email = user_form.cleaned_data.get('email')
             email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
-
-            # Create empty cart for the user
-            cart = Cart(user=profile)
-            cart.save()
 
             
             # username= user_form.cleaned_data.get('username')

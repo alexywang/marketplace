@@ -28,4 +28,4 @@ class UserForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields=["phone","address",]
+        fields=["phone"]
