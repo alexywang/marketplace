@@ -8,14 +8,11 @@ from user.models import UserProfile
 # Create your views here
 def add_to_cart(request):
     context = {}
-    print('start')
 
     # force login
     if not request.user.is_authenticated:
-        print('not authenticated')
         return HttpResponseBadRequest('login')
 
-    print('done')
 
     # Using item ID, find the item model then add it to the user's cart
     item_id = request.GET['item_id']
@@ -29,7 +26,6 @@ def add_to_cart(request):
         return HttpResponseBadRequest("ownitem")
 
     # Item exists, update cart and return success response
-    #TODO: Model work
     user = request.user.userprofile
     cart = Cart.objects.get(user=user)
 
@@ -45,7 +41,7 @@ def remove_from_cart(request):
 
     #force login
     if not request.user.is_authenticated:
-        return render(request, 'user/login.html')
+        return HttpResponseBadRequest('login')
 
     item_id = request.GET['item_id']
     item = Item.objects.get(item_id=item_id)
@@ -56,4 +52,15 @@ def remove_from_cart(request):
 
     return HttpResponse()
 
+def get_cart(request):
+    context = {}
+
+    if not request.user.is_authenticated:
+        return render(request, 'user/login.html')
+
+    user = request.user.userprofile
+    cart = Cart.objects.get(user=user)
+    context['items'] = cart.items.all()
+
+    return render(request, 'buying/cart.html', context)
 
