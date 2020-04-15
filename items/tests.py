@@ -3,6 +3,7 @@ from items.models import Item
 from user.models import UserProfile
 from django.contrib.auth.models import User
 from django.db.models import Model
+import os
 from django.core.serializers import serialize
 
 from utils.query_utils import query_to_json, get_field_names
@@ -42,12 +43,11 @@ class JSONTestCase(TestCase):
 
     def test_query_to_json(self):
         items = Item.objects.all()
-        # print(serialize('json', items))
-        # for item in items:
-        #     print(type(serialize('json', [item])))
-
         item_json = query_to_json(items, exclude_fields="password")
+        expected_json = open(os.path.join(os.path.dirname(__file__), 'test_files/test_query_to_json_expected.txt'))
+        expected_json = expected_json.read()
         print(item_json)
-        self.assertTrue(1+1==2)
+        self.assertEquals(item_json, expected_json)
+
     #TODO: Finish test case
 

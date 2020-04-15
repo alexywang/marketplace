@@ -81,6 +81,7 @@ def my_items(request):
 	return render(request,'items/my_items.html',context)
 
 
+# TODO: Update to a better search algorithm
 def search_item(request):
 	context = {}
 	query = request.GET['q']

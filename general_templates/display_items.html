@@ -1,4 +1,8 @@
 <body>
+    {%load static%}
+    <script src={%static 'display_items.js'%}></script>
+
+
     <section id="listings" class="container">
             <div class="row">
                     {%for item in items%}
@@ -16,10 +20,10 @@
                                 {{item.description}}
                                 </p>
 
-
-                                <button class="btn btn-primary" onclick="">Add to Cart</button>
+                                {%autoescape on%}
+                                <button class="btn btn-primary" onclick="addToCart('{{item.item_id}}', '{%url 'add_to_cart'%}')">Add to Cart</button>
                                 <button class="btn" onclick=""> More </button>
-
+                                {% endautoescape %}
                                 </p>
                             </div>
                         </div>
@@ -28,3 +32,4 @@
             </div>
         </section>
 </body>
+

@@ -47,3 +47,18 @@
     </ul>
   </div>
 </nav>
+
+<div id="alerts">
+  {%if danger_alert%}
+    <div class="alert alert-danger" role="alert">
+      {{danger_alert}}
+    </div>
+  {%endif%}
+
+  {%if success_alert%}
+    <div class="alert alert-success" role="alert">
+      {{success_alert}}
+    </div>
+  {%endif%}
+
+</div>

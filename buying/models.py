@@ -10,5 +10,13 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     
     items = models.ManyToManyField(items.models.Item)
-    
 
+class Cart(models.Model):
+    cart_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(user.models.UserProfile, on_delete=models.CASCADE)
+    items = models.ManyToManyField(items.models.Item)
+
+    class Meta:
+        ordering = ('cart_id',)
+        def __str__(self):
+            return self.name
