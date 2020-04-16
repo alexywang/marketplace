@@ -19,8 +19,7 @@ class Item(models.Model):
     description = models.TextField(max_length=500, blank=True)
     price = models.DecimalField(max_digits=9, decimal_places=2)
     quantity = models.IntegerField(default=1)
-    sold = models.BooleanField(default=False) #do we need this? or can we update once its attached to an order 
-    image= models.ImageField(upload_to=user_directory_path,blank=True,null=True) #python -m pip install Pillow (need this on server) 
+    image= models.ImageField(upload_to=user_directory_path,blank=True,null=True) #python -m pip install Pillow (need this on server)
     category=models.ManyToManyField(Category)
     date_uploaded=models.DateField(auto_now=True)
     

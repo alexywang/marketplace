@@ -1,6 +1,7 @@
 function addToCart(itemId, addCartUrl){
     // Get the corresponding quantity input from the html page
     let quantity = $('#item-'+itemId).find('#quantity').val();
+    console.log(quantity)
     $.ajax({
         url: addCartUrl,
         data: {

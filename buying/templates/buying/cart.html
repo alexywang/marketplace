@@ -15,5 +15,12 @@
     {%else%}
         {%include 'display_items.html'%}
     {%endif%}
+
+    <form action="{%url 'cart'%}" method="post">
+        {%csrf_token%}
+        <label for="shipping_address">Shipping Address</label>
+        <input type="text" id="shipping_address" name="shipping_address">
+        <input type="submit" value="Checkout">
+    </form>
 </body>
 </html>
