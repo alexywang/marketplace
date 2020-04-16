@@ -2,14 +2,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseBadRequest
 from items.models import Item
 from buying.models import *
+from django.contrib.auth.decorators import login_required
 
 from user.models import UserProfile
 
-# Create your views here
+
 def add_to_cart(request):
     context = {}
 
-    # force login
+  
     if not request.user.is_authenticated:
         return HttpResponseBadRequest('login')
 

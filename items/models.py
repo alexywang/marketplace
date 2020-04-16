@@ -19,7 +19,7 @@ class Item(models.Model):
     description = models.TextField(max_length=500, blank=True)
     price = models.DecimalField(max_digits=9, decimal_places=2)
     quantity = models.IntegerField(default=1)
-    image= models.ImageField(upload_to=user_directory_path,blank=True,null=True) #python -m pip install Pillow (need this on server)
+    image= models.ImageField(upload_to=user_directory_path,default='item_image/default/No_Image.jpg') #python -m pip install Pillow (need this on server)
     category=models.ManyToManyField(Category)
     date_uploaded=models.DateField(auto_now=True)
     
