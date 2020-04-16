@@ -1,7 +1,19 @@
-.navbar {
-  background-color: #669900;
+.navbar li {
+  padding-right: 30px;
 }
 
-#sitetitle {
+#searchbar {
+  margin-right: -100px;
+}
+
+.hovernav:hover {
+  border: 1px solid black;
+}
+
+#navtext {
   font-family: "Courier New", Courier, monospace;
+}
+
+#loginsect {
+
 }
