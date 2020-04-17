@@ -83,10 +83,10 @@ def my_items(request):
 	return render(request,'items/my_items.html',context)
 
 
-# TODO: Update to a better search algorithm
+# TODO: Update to a better search algorithm and should limit result size 
 def search_item(request):
 	context = {}
-	query = request.GET['q']
+	query = request.GET.get('q','')
 	items = Item.objects.filter(name__contains=query)
 	context['items']=items
 	context['query'] = query

@@ -23,6 +23,7 @@
                                 <input type="number" id="quantity" value="1" min="1" max="5">
                                 <button class="btn btn-primary" onclick="addToCart('{{item.item_id}}', '{%url 'add_to_cart'%}')">Add to Cart</button>
                                 <button class="btn" onclick=""> More </button>
+                                <button class="btn" onclick="window.location.href='{% url 'room' item.name %};"> Chat </button>
                                 {% endautoescape %}
                                 </p>
                             </div>

@@ -65,9 +65,10 @@
 
       <div style="width:15%;"></div>
       <div style="float:right;" id="searchbar">
-      <form class="form-inline my-2 my-lg-0 navbar-right pt-1 active-purple-2" action="{%url 'search'%}">
+      <form class="form-inline my-2 my-lg-0 navbar-right pt-1 active-purple-2" action="{% url 'search'%}">
+        {% csrf_token %}
         <i class="fa fa-search text-dark" aria-hidden="true"></i>
-        <input class="form-control form-control-sm ml-2 w-75" type="text" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-sm ml-2 w-75" type="text" placeholder="Search" aria-label="Search"name='q'>
       </form>
       </div>
     </div>
