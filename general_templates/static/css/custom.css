@@ -1,4 +1,4 @@
-#navtext {
+.text {
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -8,4 +8,14 @@
 
 .form-inline: focus {
   border-color: black;
+}
+
+#signupsubmit:hover {
+  border: 1px solid black;
+  text-decoration: none;
+}
+
+#loginsubmit:hover {
+  border: 1px solid black;
+  text-decoration: none;
 }
