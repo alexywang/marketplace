@@ -11,6 +11,8 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.core import serializers
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 from items.models import Item
 
@@ -112,6 +114,11 @@ def do_login(request):
     return render(request,'user/login.html',context)
 
 def do_logout(request):
+    if request.user.is_authenticated:
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(request.user.username, {
+            'type': 'logout_message',
+            'message': 'Disconnecting. You logged out from another browser or tab.'})
     logout(request)
     return redirect('login')
 
