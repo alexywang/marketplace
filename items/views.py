@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404,reverse,HttpResponse
+from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from .forms import ItemForm
 from user.models import UserProfile
@@ -22,7 +23,7 @@ def add_item(request):
    
    
 			return redirect('my_items')
-		
+		return HttpResponseBadRequest('Invalid Input')
 	else:
 		form=ItemForm()
 		context['form']=form
@@ -45,6 +46,7 @@ def edit_item(request,pk=None):
                 form.save()
                 form.save_m2m()
                 return redirect('my_items')
+            return HttpResponseBadRequest('Invalid Input')
         else:
             form=ItemForm(instance=item)
             context['form']=form

@@ -16,7 +16,7 @@
         {%include 'display_items.html'%}
     {%endif%}
 
-    <form action="{%url 'cart'%}" method="post">
+    <form action="{%url 'cart'%}" method="POST">
         {%csrf_token%}
         <label for="shipping_address">Shipping Address</label>
         <input type="text" id="shipping_address" name="shipping_address">
