@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <head>
-<meta charset="UTF-8"
+  {%include 'bootstrap/bootstrap.html'%}
 </head>
 <body>
-        {%include 'navbar.html'%}
-        {%include 'bootstrap/bootstrap.html'%}
-<h1>Login</h1>
-<div>{{ form.non_field_errors }}</div>
-<form action="{% url 'login'%}" method="POST">
-    {% csrf_token %}
-    <p>
-     {{form.as_p}}
-    <p>
-      <input type="submit" value="Login" />
-    </p>
-    {%if request.GET.next%}
-      <input type="hidden" name="next" value="{{request.GET.next}}">
-    {%endif%}
-</form>
-<a href="{% url 'register'%}">Register</a>
-
+{%include 'navbar.html'%}
+<div class="logintext ml-5 mt-5">
+  <h1>Login</h1>
+  <div>{{ form.non_field_errors }}</div>
+  <form class="ml-2 mt-4" action="{% url 'login'%}" method="POST">
+      {% csrf_token %}
+      <p>
+       {{form.as_p}}
+      <p>
+        <input type="submit" value="Login" />
+      </p>
+      {%if request.GET.next%}
+        <input type="hidden" name="next" value="{{request.GET.next}}">
+      {%endif%}
+  </form>
+  <a class="ml-2" href="{% url 'register'%}">Sign Up</a>
+</div>
 </body>
