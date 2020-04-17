@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    
-    <body>
-        {%include 'navbar.html'%}
-        {%include 'bootstrap/bootstrap.html'%}
-        <form method="POST" action="{% url 'register' %}">
-            {%csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            <input type="submit" value="Create New Account">
-        </form>
-         <h1>{{user_form.errors}} {{profile_form.errors}}</h1>
-    </body>
-
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>Sign Up</title>
+  </head>
+  <body>
+    {%include 'navbar.html'%}
+    <div class="text text-dark ml-5">
+      <h2 class="mt-5 mb-5">Sign Up</h2>
+      <form method="POST" action="{% url 'register' %}">
+          {%csrf_token %}
+          {{ user_form.as_p }}
+          {{ profile_form.as_p }}
+          <input type="submit" value="Create Account">
+      </form>
+      <h1>{{user_form.errors}} {{profile_form.errors}}</h1>
+    </div>
+  </body>
 </html>
