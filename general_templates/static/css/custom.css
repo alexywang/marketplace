@@ -1,19 +1,11 @@
-.navbar li {
-  padding-right: 30px;
-}
-
-#searchbar {
-  margin-right: -100px;
+#navtext {
+  font-family: "Courier New", Courier, monospace;
 }
 
 .hovernav:hover {
   border: 1px solid black;
 }
 
-#navtext {
-  font-family: "Courier New", Courier, monospace;
-}
-
-#loginsect {
-
+.form-inline: focus {
+  border-color: black;
 }
