@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        {%include 'navbar.html'%}
-        {%include 'bootstrap/bootstrap.html'%}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>Account Registration Success</title>
+  </head>
+  <body>
+      {%include 'navbar.html'%}
+      <div class="text text-dark ml-5 mt-5">
+        <p class="ml-2 mb-5">Thank you for registering, you may now login to your account.</p>
+        <a class="p-2 ml-1 text-dark" id="loginsubmit" href="{% url 'login' %}"> Login </a>
+      </div>
 
-        <p>Thank you for registering, you can now login to your account</p>
-        <a href="{% url 'login' %}"> Login </a>
-
-    </body>
+  </body>
 </html>
