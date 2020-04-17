@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<head>
-  {%include 'bootstrap/bootstrap.html'%}
-</head>
-<body>
-{%include 'navbar.html'%}
-<div class="logintext ml-5 mt-5">
-  <h1>Login</h1>
-  <div>{{ form.non_field_errors }}</div>
-  <form class="ml-2 mt-4" action="{% url 'login'%}" method="POST">
-      {% csrf_token %}
-      <p>
-       {{form.as_p}}
-      <p>
-        <input type="submit" value="Login" />
-      </p>
-      {%if request.GET.next%}
-        <input type="hidden" name="next" value="{{request.GET.next}}">
-      {%endif%}
-  </form>
-  <a class="ml-2" href="{% url 'register'%}">Sign Up</a>
-</div>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>Login</title>
+  </head>
+  <body>
+    {%include 'navbar.html'%}
+    <div class="text ml-5 mt-5 text-dark">
+      <h2>Login</h2>
+      <div>{{ form.non_field_errors }}</div>
+      <form class="ml-2 mt-4 form" action="{% url 'login'%}" method="POST">
+          {% csrf_token %}
+          <p>
+           {{form.as_p}}
+          <p>
+            <input type="submit" value="Login" />
+          </p>
+          {%if request.GET.next%}
+            <input type="hidden" name="next" value="{{request.GET.next}}">
+          {%endif%}
+      </form>
+      <a class="p-2 text-dark" id="signupsubmit" href="{% url 'register'%}">Sign Up</a>
+    </div>
+  </body>
+</html>
