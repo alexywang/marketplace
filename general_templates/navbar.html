@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-xl navbar-fixed-top navbar-light bg-white pt-2 pl-2">
 
   <div class="navbar-header">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{%url 'index'%}">
         {% load static %}
         <img src="{% static '/css/logo.png' %}" width="250" height="45" class="d-inline-block align-top" alt="FurniShare">
     </a>
   </div>
 
-  <div style="width:10%;"></div>
+  <div style="width:5%;"></div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -24,6 +24,7 @@
         {%else%}
         <a class="nav-link disabled text-muted" href="{%url 'chat_index'%}" aria-disabled="true">Chat</a>
         {%endif%}
+      </li>
       <li class="nav-item dropdown hovernav"> <!--My Listings-->
         <a class="nav-link dropdown-toggle text-dark" href="#" id="navbardrop" data-toggle="dropdown">
           My Listings
@@ -45,13 +46,12 @@
           </div>
           {%endif%}
         </div>
-
-        <div style="width:10%;"></div>
+        </li>
 
         <!--Login/Logout-->
         {%if user.is_authenticated%}
         <li class="nav-item hovernav">
-          <a class="nav-link text-dark" href="{%url 'logout'%}">Logout</a>
+          <a class="nav-link text-dark" href="{%url 'logout'%}"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
         </li>
         {%else%}
         <li class="nav-item hovernav">
@@ -61,18 +61,27 @@
           <a class="nav-link text-dark" href="{%url 'register'%}"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up</a>
         </li>
         {%endif%}
-      </ul>
 
-      <div style="width:15%;"></div>
-      <div style="float:right;" id="searchbar">
-      <form class="form-inline my-2 my-lg-0 navbar-right pt-1 active-purple-2" action="{% url 'search'%}">
-        {% csrf_token %}
-        <i class="fa fa-search text-dark" aria-hidden="true"></i>
-        <input class="form-control form-control-sm ml-2 w-75" type="text" placeholder="Search" aria-label="Search"name='q'>
-      </form>
-      </div>
-    </div>
 
+        <!--Cart-->
+        <li class="nav-item hovernav">
+        {%if user.is_authenicated%}
+          <a class="nav-link text-dark" href="{%url 'cart'%}"><i class="fa fa-shopping-cart text-dark" aria-hidden="true"></i></a>
+        {%else%}
+          <a class="nav-link disabled text-dark" href="{%url 'cart'%}"><i class="fa fa-shopping-cart text-dark" aria-hidden="true"></i></a>
+        {%endif%}
+        </ul>
+
+
+        <div style="width:5%;"></div>
+
+
+
+        <form class="form-inline my-2 my-lg-0 navbar-right pt-1 active-purple-2" action="{%url 'search'%}">
+          <i class="fa fa-search text-dark" aria-hidden="true"></i>
+          <input class="form-control form-control-sm ml-2 w-75" type="text" placeholder="Search" aria-label="Search">
+        </form>
+        </div>
 </nav>
 
 <div id="alerts">
