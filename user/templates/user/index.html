@@ -11,9 +11,9 @@
       {%include 'navbar.html'%}
 
       <div class="text text-dark mt-5 ml-5">
-        <center><h1> Listings </h1></center>
+        <h2 class="mb-3"> Listings </h2>
         {%if not items%}
-            There are currently no listings.
+            There are currently no listings available.
         {%else%}
             {%include 'display_items.html'%}
         {%endif%}
