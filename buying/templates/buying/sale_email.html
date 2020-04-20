@@ -1,0 +1,18 @@
+{%autoescape off%}
+You have just made a sale on FurniShare!
+
+Order Summary:
+{%for order in batch%}
+--------------------------------------------
+    Order ID: {{order.order_id}}
+    Item: {{order.item.name}}
+    Quantity Sold: {{order.quantity}}
+    Total Price: {{order.price}}
+{%endfor%}
+--------------------------------------------
+
+
+Sincerely,
+FurniShare
+
+{%endautoescape%}

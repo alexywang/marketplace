@@ -4,7 +4,9 @@ from items.models import Item
 from buying.models import *
 import django.core.serializers
 from myutils import query_utils
-
+from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 import json
 from user.models import UserProfile
 
@@ -117,6 +119,8 @@ def get_cart(request):
         #TODO: Post functionality for ordering
         shipping = request.POST['shipping_address']
 
+        # Create dict of sellers to send emails to them all at once
+        sellers = {}
         # Create orders
         for cart_item in cart_items:
             cart_item.item.quantity -= cart_item.quantity # Update quantity on listing
@@ -129,7 +133,17 @@ def get_cart(request):
             # Delete item from their cart
             cart_item.delete()
 
+            # Add to seller's orders
+            if order.item.seller.user.email in sellers.keys():
+                sellers[order.item.user.email].append(order)
+            else:
+                sellers[order.item.seller.user.email] = [order]
+
+        # send batch of emails
+        _send_order_emails(sellers)
+
         return redirect('orders')
+
 
 # for a user validate their cart (i.e. delete items that dont exist anymore or are sold out)
 def _validate_cart(profile):
@@ -140,6 +154,20 @@ def _validate_cart(profile):
             cart_item.delete()
             valid = False
     return valid
+
+# Upon order send email to the seller
+def _send_order_emails(sellers):
+    for seller in sellers.keys():
+        to_email = str(seller)
+        subject = 'Your sale on FurniShare'
+        context = {}
+        context['batch'] = []
+        for order in sellers[seller]:
+            context['batch'].append(order)
+        message = render_to_string('buying/sale_email.html', context)
+        email = EmailMessage(subject, message, to=[to_email])
+        email.send()
+
 
 
 # To see a user's past orders
