@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        {%include 'bootstrap/bootstrap.html'%}
-        {%include 'navbar.html'%}
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>Home</title>
+  </head>
+  <body>
+      {%include 'navbar.html'%}
 
+      <div class="text text-dark mt-5 ml-5">
         <center><h1> Listings </h1></center>
-       
-
         {%if not items%}
             There are currently no listings.
         {%else%}
             {%include 'display_items.html'%}
         {%endif%}
+      </div>
 
-        <script>
-            // Don't display your own items on index
-            let me = '{{user.username}}'
-            console.log(me);
-            $('.seller-'+me).each(function (element){
-                $(this).parents('.card').hide();
-            });
-            
-        </script>
-    </body>
+      <script>
+          // Don't display your own items on index
+          let me = '{{user.username}}'
+          console.log(me);
+          $('.seller-'+me).each(function (element){
+              $(this).parents('.card').hide();
+          });
+
+      </script>
+  </body>
 </html>
