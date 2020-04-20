@@ -6,4 +6,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=15, blank=True)
     # address = models.TextField(max_length=400, blank=True)
+    def __str__(self):
+        return self.user.username
 
