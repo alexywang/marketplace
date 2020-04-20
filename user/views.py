@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,HttpResponseRedirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from user.forms import UserProfileForm, UserForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -13,6 +13,7 @@ from django.http import HttpResponse
 from django.core import serializers
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from user.models import *
 
 from items.models import Item
 
@@ -21,13 +22,14 @@ import sys
 
 def index(request):
     context = {}
+    context['page_type'] = 'index'
     if request.user.is_authenticated:
         username=request.user.username
     else:
         username='not logged in'
 
     context['username']=username
-    context['items'] = Item.objects.all()
+    context['items'] = Item.objects.all().order_by('-date_uploaded')
     # context['listings']=serializers.serialize('json', Item.objects.all())
     # context_json = json.dumps(context)
 
@@ -123,7 +125,31 @@ def do_logout(request):
     return redirect('login')
 
 
+# Generate a page for a user profile
+def get_user(request):
+    context = {}
+    if request.method == 'GET':
+        # Get user information
+        target_username = request.GET['username']
+        target = User.objects.get(username=target_username)
+        context['username'] = target.username
+        context['email'] = target.email
 
+        # Get user listings
+        listings = Item.objects.filter(seller__user__username=target.username)
+        context['items'] = listings
+        print(len(listings))
+        return render(request, 'user/user_profile.html', context)
+
+    else:
+        return HttpResponse('Wtf Post?')
+
+
+# Password reset
+def password_reset(request):
+    if request.method == 'GET':
+        context = {}
+        return render(request, 'user/password_reset.html', context)
 
             
 

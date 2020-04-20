@@ -7,20 +7,37 @@
 <body>
     {%include 'bootstrap/bootstrap.html'%}
     {%include 'navbar.html'%}
-    <h1>
-        My Cart
-    </h1>
-    {%if not items%}
-        Your cart is empty.
-    {%else%}
-        {%include 'display_items.html'%}
+    
+    {%if order_failure%}
+        <div class="alert alert-warning alert-dismissable fade show" role="alert">
+            The order was not processed since one or more items in your cart is no longer in stock. Your cart has been updated.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>    
+    {%elif not valid_cart%}
+        <div class="alert alert-danger alert-dismissable fade show" role="alert">
+            One or more items have been removed from your cart because there was not enough stock remaining.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     {%endif%}
 
-    <form action="{%url 'cart'%}" method="POST">
+    <center><h1> My Cart </h1></center>
+    {%if not items%}
+        <center>Your cart is empty.</center>
+    {%else%}
+        {%include 'display_items.html'%}
+        Total Price: ${{total_price}}
+        <form action="{%url 'cart'%}" method="POST">
         {%csrf_token%}
         <label for="shipping_address">Shipping Address</label>
-        <input type="text" id="shipping_address" name="shipping_address">
+        <input type="text" id="shipping_address" name="shipping_address" required="required">
         <input type="submit" value="Checkout">
     </form>
+    {%endif%}
+
+  
 </body>
 </html>

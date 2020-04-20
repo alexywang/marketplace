@@ -1,9 +1,13 @@
+{% load static %}
+<head>
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
+</head>
+
 <nav class="navbar navbar-expand-xl navbar-fixed-top navbar-light bg-white pt-2 pl-2">
 
   <div class="navbar-header">
     <a class="navbar-brand" href="{%url 'index'%}">
-        {% load static %}
-        <img src="{% static '/css/logo.png' %}" width="260" height="45" class="d-inline-block align-top" alt="FurniShare">
+        <img src="{% static 'logo.png' %}" width="260" height="45" class="d-inline-block align-top" alt="FurniShare">
     </a>
   </div>
 
@@ -46,7 +50,12 @@
           {%endif%}
         </div>
         </li>
-
+        <!-- Orders -->
+        {%if user.is_authenticated%}
+        <li class="nav-item active hovernav pr-1 mr-2">
+          <a class="nav-link text-dark" href="{%url 'orders'%}">Orders<span class="sr-only">(current)</span></a>
+        </li>        
+        {%endif%}
         <!--Login/Logout-->
         {%if user.is_authenticated%}
         <li class="nav-item hovernav pr-1">
@@ -66,16 +75,24 @@
           <li class="nav-item">
             <form class="form-inline my-2 my-lg-0 pt-1" action="{%url 'search'%}">
               <i class="fa fa-search text-dark" aria-hidden="true"></i>
-              <input class="form-control form-control-sm ml-2 w-20" name= "q" type="text" placeholder="Search" aria-label="Search">
+
+           
+
+              <input class="form-control form-control-sm ml-2 w-20" type="text" name="q" placeholder="Search" aria-label="Search">
+
             </form>
           </li>
           <!--Cart-->
           <li class="nav-item hovernav pr-1">
-            {% if user.is_authenticated %}
+
+      
+
+            {% comment %} {%if user.is_authenticated%} {% endcomment %}
+
               <a class="nav-link text-dark" href="{%url 'cart'%}"><i class="fa fa-shopping-cart fa-lg text-dark" aria-hidden="true"></i></a>
-            {%else%}
+            {% comment %} {%else%}
               <a class="nav-link disabled text-dark" href="{%url 'cart'%}"><i class="fa fa-shopping-cart fa-lg text-dark" aria-hidden="true"></i></a>
-            {%endif%}
+            {%endif%} {% endcomment %}
           </li>
         </ul>
         </div>

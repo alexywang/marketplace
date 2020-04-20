@@ -8,33 +8,11 @@
     <body>
         {%include 'navbar.html'%}
         {%include 'bootstrap/bootstrap.html'%}
-        <h1>My Items</h1>
+        <center><h1>My Items</h1></center>
         {%if not items %}
-            <h1>You have not posted any items!</h1>
+            <h1>You have not posted any items.</h1>
         {% else %}
-            {% for item in items %}
-                <section style="padding: 20px;"> 
-                    <li><b>Name: {{item.name}}</b></li>
-                    <li>description: {{item.description}}</li>
-                    <li>Price: ${{item.price}}</li>
-                    <li>Quantity: {{item.quantity}}</li>
-                   
-                   
-                    {% for category in item.category.all %}
-                        <li> Category: {{category.name}}</li>
-                    {% endfor %}
-                   <li><a href="{% url 'edit_item' pk=item.item_id %}">Edit Item</a></li> 
-                   <li><a href="{% url 'delete_item' pk=item.item_id %}">Delete Item</a></li> 
-                    
-                    {% if item.image %}
-                    <img src="{{item.image.url}}" width="200px" height="200px">
-                    {% endif %}
-                   
-                    
-                   
-
-                </section>
-            {% endfor %}
+            {%include 'display_items.html'%}
         {% endif %}
     </body>
 

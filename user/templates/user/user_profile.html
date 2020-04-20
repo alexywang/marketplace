@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        {%include 'bootstrap/bootstrap.html'%}
+        {%include 'navbar.html'%}
+
+        <center><h1>{{username}}'s Listings</h1></center>
+        {%if not items%}
+            {{username}} does not have any listings yet.
+        {%else%}
+            {%include 'display_items.html'%}
+        {%endif%}
+    </body>
+</html>

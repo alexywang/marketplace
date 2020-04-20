@@ -7,7 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/items" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/marketplace" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/user" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myutils" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (djangoexperiment)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

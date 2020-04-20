@@ -1,37 +1,54 @@
 <body>
     {%load static%}
-    <script src={%static 'display_items.js'%}></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src={%static 'display_items.js'%}></script>
+
 
     <section id="listings" class="container">
             <div class="row">
                     {%for item in items%}
-                        <div id="item-{{item.item_id}}"class="card" style="width:18rem; margin:10px;">
-                            {% if item.image %}
-                                <img class="card-img-top" src="{{item.image.url}}" width="300px" height="200px">
-                            {%else%}
-                                <img class="card-img-top" src="#" width="300px" height="200px">
-                            {%endif%}
-                            <div class="card-body">
-                                <h5 class="card-title">{{item.name}}</h5>
+                        {%if item.quantity > 0%}
+                            <div id="item-{{item.item_id}}" class="card" style="width:18rem; margin:10px;">
+                                {% if item.image %}
+                                    <img class="card-img-top" src="{{item.image.url}}" width="300px" height="200px">
+                                {%else%}
+                                    <img class="card-img-top" src="#" width="300px" height="200px">
+                                {%endif%}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{item.name}}</h5>
 
-                                <p class="card-text">
-                                <strong> {{item.seller.user.username}} </strong><br>
-                                {{item.description}}
-                                </p>
-
-                                {%autoescape on%}
-                                <input type="number" id="quantity" value="1" min="1" max="5">
-                                <button class="btn btn-primary" onclick="addToCart('{{item.item_id}}', '{%url 'add_to_cart'%}')">Add to Cart</button>
-                                <button class="btn" onclick=""> More </button>
-                                <button class="btn" onclick="window.location.href='{% url 'room' item.name %}';"> Chat </button>
-                                {% endautoescape %}
-                                </p>
+                                    <p class="card-text">
+                                    <strong>
+                                        <a class="seller-{{item.seller.user.username}}" href="{%url 'profile'%}?username={{item.seller.user.username}}">{{item.seller.user.username}}</a> 
+                                    </strong>
+                                    <br>
+                                    {{item.description}}
+                                    </p>
+                                    <p> Stock: {{item.quantity}} </p>
+                                    <p> Price: ${{item.price}}/unit </p> 
+                                    {%if item.seller.user.id == user.id%}
+                                     {% comment %} Give actions for your own item  {% endcomment %}
+                                        <button class ="btn btn-primary" onclick="window.location.href='{%url 'edit_item' pk=item.item_id%}'">Edit Listing </button>
+                                        <button class ="btn btn-danger" onclick="window.location.href='{%url 'delete_item' pk=item.item_id%}'">Delete Listing</button>
+                                    {%else%}
+                                        {%autoescape on%}
+                                        <input type="number" id="quantity" value="0" min="0" max="{{item.quantity}}">
+                                        <button id="add-cart-button" class="add-cart-button btn btn-primary" onclick="addToCart('{{item.item_id}}', '{%url 'add_to_cart'%}', '{{page_type}}')">Add to Cart</button>
+                                        {% comment %} <button class="btn" onclick=""> More </button> {% endcomment %}
+                                        <button class="btn" onclick="window.location.href='{% url 'room' item.name %}';"> Chat </button>
+                                        {% endautoescape %}
+                                    {%endif%}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-
+                        {%endif%}
                     {%endfor%}
             </div>
-        </section>
+    </section>
+
+    <div id="alerts">
+    </div>
+
+    
 </body>
 
