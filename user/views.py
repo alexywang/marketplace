@@ -145,6 +145,12 @@ def get_user(request):
         return HttpResponse('Wtf Post?')
 
 
+# Password reset
+def password_reset(request):
+    if request.method == 'GET':
+        context = {}
+        return render(request, 'user/password_reset.html', context)
+
             
 
     
