@@ -6,7 +6,7 @@ class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     buyer  = models.ForeignKey(user.models.UserProfile, on_delete=models.SET_NULL, null=True) 
     shipping_address=models.TextField(blank=True)
-    date = models.DateField(auto_now=True)
+    date = models.DateTimeField(auto_now=True)
     # paid = models.BooleanField(default=False)
     item = models.ForeignKey(items.models.Item, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=1)
