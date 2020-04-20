@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {%include 'bootstrap/bootstrap.html'%}
+    <title>Search</title>
+  </head>
+<body>
     {%include 'navbar.html'%}
+    <div class="text text-dark mt-5 ml-5">
+      {%if not items%}
+      There are no listings that match your search.
 
-    {%if not items%}
-    There are no listings that match your search.
+      {%else%}
+      <h2>Search Results for <font color="Blue">"{{query}}"</font></h2>
 
-    {%else%}
-    <h1>Search Results for <font color="Blue">"{{query}}"</font></h1>
+      {%include 'display_items.html'%}
 
-    {%include 'display_items.html'%}
-
-    {%endif%}
+      {%endif%}
+    </div>
 </body>
 </html>
