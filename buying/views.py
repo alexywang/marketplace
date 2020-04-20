@@ -37,14 +37,18 @@ def add_to_cart(request):
         if int(quantity) == 0: # Remove from cart instead
             print('DELETING CART ITEM')
             cart_item.delete()
+            return HttpResponse('removed')
         else: # Update quantity
             cart_item.save()
-        return HttpResponse('updated')
+            return HttpResponse('updated')
     else: # Create new cart entry
-        print('NEW')
-        cart_item = CartItem(item=item, user=user, quantity=quantity)
-        cart_item.save()
-        return HttpResponse('added')
+        if int(quantity) == 0:
+            return HttpResponseBadRequest('noquantity')
+        else:
+            print('NEW')
+            cart_item = CartItem(item=item, user=user, quantity=quantity)
+            cart_item.save()
+            return HttpResponse('added')
 
 # Check if a user already has an item in their cart
 def get_cart_item(user, item):
@@ -55,7 +59,6 @@ def get_cart_item(user, item):
         return None
 
 # Simple GET endpoint to return the user's cart for front end processing
-
 def peek_cart(request):
 
     if not request.user.is_authenticated:
@@ -75,7 +78,7 @@ def peek_cart(request):
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
 
-
+# Show user cart and form to checkout
 def get_cart(request):
     context = {}
     context['page_type'] = 'cart'
@@ -85,7 +88,9 @@ def get_cart(request):
     user = request.user.userprofile
 
     # TODO: Handle a special notification if cart items have changed due to invalid carts.
-    cart_was_valid = _validate_cart(user)
+    valid_cart = _validate_cart(user)
+    context['valid_cart'] = valid_cart
+    context['order_failure'] = False
 
     # Get cart items
     cart_items = CartItem.objects.filter(user=user)
@@ -96,11 +101,19 @@ def get_cart(request):
     for cart_item in cart_items:
         total_price += cart_item.item.price*cart_item.quantity
 
+    context['items'] = items
+    context['total_price'] = total_price
+
     if request.method == 'GET': # View Cart
-        context['items'] = items
-        context['total_price'] = total_price
         return render(request, 'buying/cart.html', context)
+
     else: # Order the cart
+        if not valid_cart: # if the cart is no longer valid then notify refresh the cart and notify user
+            context['order_failure'] = True
+            return render(request, 'buying/cart.html', context)
+        else:
+            context['order_failure'] = False
+
         #TODO: Post functionality for ordering
         shipping = request.POST['shipping_address']
 
@@ -123,7 +136,7 @@ def _validate_cart(profile):
     valid = True
     cart_items = CartItem.objects.filter(user=profile)
     for cart_item in cart_items:
-        if not cart_item.item or cart_item.item.quantity == 0:
+        if cart_item.item.quantity < cart_item.quantity or cart_item.item.quantity == 0:
             cart_item.delete()
             valid = False
     return valid
@@ -148,7 +161,6 @@ def get_orders(request):
     print(len(my_orders))
     my_orders_json = query_utils.query_to_json(my_orders, exclude_fields="password")
     context['my_orders'] = my_orders_json
-
 
 
     return render(request, 'buying/orders.html', context)

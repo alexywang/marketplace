@@ -16,6 +16,8 @@ function addToCart(itemId, addCartUrl, pageType){
                 notification = 'Added to cart.';
             }else if(response== 'updated'){
                 notification = 'Updated item quantity.';
+            }else if(response == 'removed') {
+                notification = 'Removed from cart.'
             }else{
                 notification = response.responseText;
             }
@@ -40,24 +42,14 @@ function addToCart(itemId, addCartUrl, pageType){
                 notification = 'An item of this quantity already exists in your cart. You can either update the quantity or remove it.';
             }else if(response.responseText == 'login'){
                 notification = 'You are not logged in.';
+            }else if(response.responseText == 'noquantity'){
+                notification = 'Quantity must be at least 1 to add to cart.'
             }else{
                 notification = response.responseText;
             }
 
             displayAlert(notification, 'danger');
         },
-    });
-}
-
-function removeFromCart(itemId){
-    $.ajax({
-        url: '/buying/remove_from_cart',
-        data: {
-            'item_id': itemId
-        },
-        success: function (response) {
-        
-        }
     });
 }
 
@@ -105,7 +97,7 @@ function updateButtons(){
 // Given a list of item ids, update the cart buttons to reflect the users cart
 function doButtonUpdate(cart){
     // Reset all button apperance first
-     $('#add-cart-button').each(function (cartButton){
+     $('.add-cart-button').each(function (cartButton){
         $(this).html('Add to Cart');
         $(this).removeClass('btn-warning');
         $(this).addClass('btn-primary');     

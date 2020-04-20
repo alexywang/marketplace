@@ -28,8 +28,8 @@
                                     <p> Price: ${{item.price}}/unit </p> 
                                     {%autoescape on%}
                                     <input type="number" id="quantity" value="0" min="0" max="{{item.quantity}}">
-                                    <button id="add-cart-button" class="btn btn-primary" onclick="addToCart('{{item.item_id}}', '{%url 'add_to_cart'%}', '{{page_type}}')">Add to Cart</button>
-                                    <button class="btn" onclick=""> More </button>
+                                    <button id="add-cart-button" class="add-cart-button btn btn-primary" onclick="addToCart('{{item.item_id}}', '{%url 'add_to_cart'%}', '{{page_type}}')">Add to Cart</button>
+                                    {% comment %} <button class="btn" onclick=""> More </button> {% endcomment %}
                                     <button class="btn" onclick="window.location.href='{% url 'room' item.name %}';"> Chat </button>
                                     {% endautoescape %}
                                     </p>

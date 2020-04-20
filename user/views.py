@@ -29,7 +29,7 @@ def index(request):
         username='not logged in'
 
     context['username']=username
-    context['items'] = Item.objects.all()
+    context['items'] = Item.objects.all().order_by('-date_uploaded')
     # context['listings']=serializers.serialize('json', Item.objects.all())
     # context_json = json.dumps(context)
 

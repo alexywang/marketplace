@@ -7,6 +7,23 @@
 <body>
     {%include 'bootstrap/bootstrap.html'%}
     {%include 'navbar.html'%}
+    
+    {%if order_failure%}
+        <div class="alert alert-warning alert-dismissable fade show" role="alert">
+            The order was not processed since one or more items in your cart is no longer in stock. Your cart has been updated.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>    
+    {%elif not valid_cart%}
+        <div class="alert alert-danger alert-dismissable fade show" role="alert">
+            One or more items have been removed from your cart because there was not enough stock remaining.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {%endif%}
+
     <h1>
         My Cart
     </h1>
