@@ -64,7 +64,8 @@ def delete_item(request,pk=None):
     if item.seller==request.user.userprofile:
         
         if request.method=='POST' and 'confirm' in request.POST:
-            item.delete()
+            item.quantity = -1 # -1 to mark deleted item so previously made orders are preserved
+            item.save()
             return redirect('my_items')
         else:
             context['item']=item
@@ -77,9 +78,9 @@ def delete_item(request,pk=None):
 @login_required
 def my_items(request):
 	context={}
-	
+
 	myprofile= request.user.userprofile
-	items = Item.objects.filter(seller=myprofile)
+	items = Item.objects.filter(seller=myprofile, quantity__gte=0)
 	context['items']=items
 	return render(request,'items/my_items.html',context)
 

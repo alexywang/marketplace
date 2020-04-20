@@ -24,21 +24,20 @@
         </div>
     {%endif%}
 
-    <h1>
-        My Cart
-    </h1>
+    <center><h1> My Cart </h1></center>
     {%if not items%}
-        Your cart is empty.
+        <center>Your cart is empty.</center>
     {%else%}
         {%include 'display_items.html'%}
         Total Price: ${{total_price}}
-    {%endif%}
-
-    <form action="{%url 'cart'%}" method="POST">
+        <form action="{%url 'cart'%}" method="POST">
         {%csrf_token%}
         <label for="shipping_address">Shipping Address</label>
-        <input type="text" id="shipping_address" name="shipping_address">
+        <input type="text" id="shipping_address" name="shipping_address" required="required">
         <input type="submit" value="Checkout">
     </form>
+    {%endif%}
+
+  
 </body>
 </html>

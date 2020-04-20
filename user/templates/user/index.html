@@ -7,7 +7,7 @@
         {%include 'bootstrap/bootstrap.html'%}
         {%include 'navbar.html'%}
 
-        <h1> Listings </h1>
+        <center><h1> Listings </h1></center>
        
 
         {%if not items%}
@@ -15,5 +15,15 @@
         {%else%}
             {%include 'display_items.html'%}
         {%endif%}
+
+        <script>
+            // Don't display your own items on index
+            let me = '{{user.username}}'
+            console.log(me);
+            $('.seller-'+me).each(function (element){
+                $(this).parents('.card').hide();
+            });
+            
+        </script>
     </body>
 </html>

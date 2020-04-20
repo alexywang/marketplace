@@ -11,7 +11,6 @@ function addToCart(itemId, addCartUrl, pageType){
         },
         success: function (response) {
             let notification = '';
-            console.log(response);
             if(response == 'added'){
                 notification = 'Added to cart.';
             }else if(response== 'updated'){
@@ -105,7 +104,6 @@ function doButtonUpdate(cart){
     })
 
 
-    console.log(cart);
     for(var i = 0; i < cart.length; i ++){
         let itemId = cart[i].item_id;
         let cartQuantity = cart[i].quantity;
@@ -150,6 +148,4 @@ function getCSRFToken() {
 window.onload = function (){
     updateButtons();
 }
-// document.addEventListener('readystatechange', (event) => {
-//     updateButtons();
-// });
+

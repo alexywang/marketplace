@@ -7,9 +7,7 @@
         {%include 'bootstrap/bootstrap.html'%}
         {%include 'navbar.html'%}
 
-        <h1>{{username}}</h1>
-
-        <h3>{{username}}'s Listings</h3>
+        <center><h1>{{username}}'s Listings</h1></center>
         {%if not items%}
             {{username}} does not have any listings yet.
         {%else%}
