@@ -9,12 +9,13 @@
   </head>
   <body>
     {%include 'navbar.html'%}
-
-    <center><h1>{{username}}'s Listings</h1></center>
-    {%if not items%}
-        {{username}} does not have any listings yet.
-    {%else%}
-        {%include 'display_items.html'%}
-    {%endif%}
+    <div class="text text-dark mt-5 ml-5">
+      <h2 class="mb-3">{{username}}'s Listings</h2>
+      {%if not items%}
+          {{username}} does not have any available listings at this time.
+      {%else%}
+          {%include 'display_items.html'%}
+      {%endif%}
+    </div>
   </body>
 </html>
