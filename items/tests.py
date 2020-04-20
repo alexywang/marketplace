@@ -6,7 +6,7 @@ from django.db.models import Model
 import os
 from django.core.serializers import serialize
 
-from utils.query_utils import query_to_json, get_field_names
+from myutils.query_utils import query_to_json, get_field_names
 # Create your tests here.
 
 # Query to JSON test
@@ -17,7 +17,7 @@ class JSONTestCase(TestCase):
         for i in range(1, 2):
             index = str(i)
             user = User.objects.create_user('testusername'+index, 'testemail'+index, 'testpassword'+index)
-            profile = UserProfile.objects.create(user=user, phone='testphone'+index, address='testaddress'+index)
+            profile = UserProfile.objects.create(user=user, phone='testphone'+index)
             item = Item.objects.create(
                 item_id = item_id,
                 name = 'Item'+str(item_id),
@@ -25,7 +25,6 @@ class JSONTestCase(TestCase):
                 description ='Description'+str(item_id),
                 price=item_id,
                 quantity=item_id,
-                sold = False
             )
             item_id += 1
             item2 = Item.objects.create(
@@ -35,7 +34,6 @@ class JSONTestCase(TestCase):
                 description='Description' + str(item_id),
                 price=item_id,
                 quantity=item_id,
-                sold=False
             )
             item_id += 1
 

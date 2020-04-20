@@ -21,6 +21,7 @@ import sys
 
 def index(request):
     context = {}
+    context['page_type'] = 'index'
     if request.user.is_authenticated:
         username=request.user.username
     else:

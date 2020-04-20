@@ -1,0 +1,5 @@
+- Search returns all items if empty string is used as search query
+    -> Search for items matching category, user, etc.
+- Don't show items with no stock to any user that doesn't own it.
+- Dynamic solo listing page for all items
+- Dynamic profile page for all users

@@ -35,7 +35,7 @@ def object_to_json(obj, exclude_fields=[]):
             elif isinstance(field_val, ImageField):
                 obj_json[field] = field_val.url
             elif isinstance(field_val, ImageFieldFile):
-                pass
+                obj_json[field] = field_val.url
             else:
                 obj_json[field] = field_val
 

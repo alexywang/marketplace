@@ -126,7 +126,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "general_templates/static")
+    os.path.join(BASE_DIR, "general_templates/static"),
+    os.path.join(BASE_DIR, "buying/templates/static")
 ]
 
 ASGI_APPLICATION = 'marketplace.routing.application'

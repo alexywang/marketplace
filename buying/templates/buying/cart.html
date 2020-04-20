@@ -14,6 +14,7 @@
         Your cart is empty.
     {%else%}
         {%include 'display_items.html'%}
+        Total Price: ${{total_price}}
     {%endif%}
 
     <form action="{%url 'cart'%}" method="POST">

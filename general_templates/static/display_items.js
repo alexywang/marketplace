@@ -1,8 +1,9 @@
-function addToCart(itemId, addCartUrl){
+function addToCart(itemId, addCartUrl, pageType){
     // Get the corresponding quantity input from the html page
     let quantity = $('#item-'+itemId).find('#quantity').val();
-    console.log(quantity)
+
     $.ajax({
+        method: "GET",
         url: addCartUrl,
         data: {
             'item_id': itemId,
@@ -14,19 +15,18 @@ function addToCart(itemId, addCartUrl){
             if(response == 'added'){
                 notification = 'Added to cart.';
             }else if(response== 'updated'){
-                notification = 'Updated quantity.';
+                notification = 'Updated item quantity.';
             }else{
                 notification = response.responseText;
             }
             
-            let alerts = document.getElementById('alerts');
-            alerts.innerHTML +=
-                `<div class="alert alert-success alert-dismissible" role="alert">
-                    ${notification}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>`
+            displayAlert(notification, 'success');
+            if(pageType == 'cart'){
+                window.location.reload();
+            }
+            
+            updateButtons();
+
             
         }, 
         error: function (response){
@@ -44,18 +44,120 @@ function addToCart(itemId, addCartUrl){
                 notification = response.responseText;
             }
 
-            let alerts = document.getElementById('alerts');
-            alerts.innerHTML +=
-            `<div class="alert alert-danger alert-dismissable" role="alert">
-                ${notification}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>`
+            displayAlert(notification, 'danger');
+        },
+    });
+}
+
+function removeFromCart(itemId){
+    $.ajax({
+        url: '/buying/remove_from_cart',
+        data: {
+            'item_id': itemId
+        },
+        success: function (response) {
+        
         }
     });
 }
 
-function test(print){
-    window.alert(print);
+function displayAlert(notification, type){
+    let alerts = document.getElementById('alerts');
+    alerts.innerHTML += 
+    `<div class="alert alert-${type} alert-dismissable fade show" role="alert">
+        ${notification}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>`
+
+
+
+    // // Set alerts to close after 1 second
+    // $('.alert').delay(3000).slideUp(200, function(){
+    //     $('.alert').alert('close');
+    // });
+
 }
+
+// Update add to cart buttons to reflect the available options depending on the user's cart
+function updateButtons(){
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: '/buying/peek_cart',
+        // headers: {
+        //     'X-CRSFToken': getCSRFToken()
+        // },
+        data: "data",
+        success: function (response) {
+            doButtonUpdate(response.cart);
+        },
+        error: function (response) {
+            console.log("error")
+        }
+
+
+    });
+}
+
+// Given a list of item ids, update the cart buttons to reflect the users cart
+function doButtonUpdate(cart){
+    // Reset all button apperance first
+     $('#add-cart-button').each(function (cartButton){
+        $(this).html('Add to Cart');
+        $(this).removeClass('btn-warning');
+        $(this).addClass('btn-primary');     
+    
+    })
+
+
+    console.log(cart);
+    for(var i = 0; i < cart.length; i ++){
+        let itemId = cart[i].item_id;
+        let cartQuantity = cart[i].quantity;
+        let itemCard = $('#item-'+itemId);
+        // Set quantity to current cart amount
+        if(itemCard){
+            itemCard.find('#quantity').val(cartQuantity);
+            let cartButton = itemCard.find('#add-cart-button');
+            if($('#item-'+itemId).find('#quantity').val() > 0){
+                cartButton.html('Update Cart');
+                cartButton.removeClass('btn-primary');
+                cartButton.addClass('btn-warning');
+            }else{
+                cartButton.html('Add to Cart');
+                cartButton.removeClass('btn-warning');
+                cartButton.addClass('btn-primary');
+
+            }
+        }
+    }
+}
+
+
+// Get crsf token for POST request
+function getCSRFToken() {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, 10) == ('csrftoken' + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(10));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+// Update cart buttons on page load
+window.onload = function (){
+    updateButtons();
+}
+// document.addEventListener('readystatechange', (event) => {
+//     updateButtons();
+// });

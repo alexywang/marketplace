@@ -92,6 +92,14 @@ def search_item(request):
 	context['query'] = query
 	return render(request, 'items/search_results.html', context)
 
+# Return an item's image
+def get_item_image(request):
+    # item_id = request.GET['item_id']
+    item = Item.objects.get(item_id=7) # temp to test
+    image = item.image
+    print(type(image))
+    return HttpResponse(item.image.url, content_type='text/html')
+
 
 
 
