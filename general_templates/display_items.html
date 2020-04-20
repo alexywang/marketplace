@@ -18,7 +18,10 @@
                                     <h5 class="card-title">{{item.name}}</h5>
 
                                     <p class="card-text">
-                                    <strong> {{item.seller.user.username}} </strong><br>
+                                    <strong>
+                                        <a href="{%url 'profile'%}?username={{item.seller.user.username}}">{{item.seller.user.username}}</a> 
+                                    </strong>
+                                    <br>
                                     {{item.description}}
                                     </p>
                                     <p> Stock: {{item.quantity}} </p>

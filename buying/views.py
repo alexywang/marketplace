@@ -85,7 +85,7 @@ def get_cart(request):
     user = request.user.userprofile
 
     # TODO: Handle a special notification if cart items have changed due to invalid carts.
-    cart_was_valid = _validategi_cart(user)
+    cart_was_valid = _validate_cart(user)
 
     # Get cart items
     cart_items = CartItem.objects.filter(user=user)

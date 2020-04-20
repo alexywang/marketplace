@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,HttpResponseRedirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from user.forms import UserProfileForm, UserForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -13,6 +13,7 @@ from django.http import HttpResponse
 from django.core import serializers
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from user.models import *
 
 from items.models import Item
 
@@ -124,6 +125,24 @@ def do_logout(request):
     return redirect('login')
 
 
+# Generate a page for a user profile
+def get_user(request):
+    context = {}
+    if request.method == 'GET':
+        # Get user information
+        target_username = request.GET['username']
+        target = User.objects.get(username=target_username)
+        context['username'] = target.username
+        context['email'] = target.email
+
+        # Get user listings
+        listings = Item.objects.filter(seller__user__username=target.username)
+        context['items'] = listings
+        print(len(listings))
+        return render(request, 'user/user_profile.html', context)
+
+    else:
+        return HttpResponse('Wtf Post?')
 
 
             
