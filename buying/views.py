@@ -116,7 +116,7 @@ def get_cart(request):
             # Delete item from their cart
             cart_item.delete()
 
-        return HttpResponse("Checkout")
+        return redirect('orders')
 
 # for a user validate their cart (i.e. delete items that dont exist anymore or are sold out)
 def _validate_cart(profile):
