@@ -17,7 +17,7 @@
           </ul>
       </div>
       <div class="message-input">
-          <input id="chat-message-input" type="text" size="100"/><br/>
+          <input class="text-muted mb-3" id="chat-message-input" placeholder="Type a message..." type="text" style="width: 400px; height: 50px;"/><br/>
           <input id="chat-message-submit" type="button" value="Send"/>
       </div>
     </div>
@@ -63,7 +63,7 @@
               author=author+"(Seller)"
               msgListTag.setAttribute("name","seller");
           }
-          
+
           pTag.textContent=author + ": "+ data.content;
 
           if(author===username){
