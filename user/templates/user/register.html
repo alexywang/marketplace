@@ -9,7 +9,7 @@
   </head>
   <body>
     {%include 'navbar.html'%}
-    <div class="text text-dark ml-5">
+    <div class="text text-dark ml-5 mb-5">
       <h2 class="mt-5 mb-5">Sign Up</h2>
       <form method="POST" action="{% url 'register' %}">
           {%csrf_token %}
@@ -17,7 +17,7 @@
           {{ profile_form.as_p }}
           <input type="submit" value="Create Account">
       </form>
-      <h1>{{user_form.errors}} {{profile_form.errors}}</h1>
+      <h2>{{user_form.errors}} {{profile_form.errors}}</h2>
     </div>
   </body>
 </html>
