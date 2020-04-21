@@ -9,22 +9,21 @@
   </head>
   <body>
     {%include 'navbar.html'%}
-    <div class="text text-dark mt-5 ml-5">
-      {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
             <div class="alert alert-danger">
                 <strong>{{ error|escape }}</strong>
             </div>
         {% endfor %}
-        {% endif %}
-      
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    {% endif %}
+    <div class="text text-dark mt-5 ml-5">
       <h2>Edit Listing</h2>
       <form method="POST" enctype="multipart/form-data">
           {%csrf_token %}

@@ -9,27 +9,25 @@
   </head>
     <body>
       {%include 'navbar.html'%}
-      <div class="text text-dark mt-5 mb-5 ml-5">
-
-        
-        
-        {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-        {% endif %}
-       
       
-      <h2>Add Listing</h2>
+      {% if form.errors %}
+      {% for field in form %}
+          {% for error in field.errors %}
+              <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+              </div>
+          {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">
+              <strong>{{ error|escape }}</strong>
+          </div>
+      {% endfor %}
+      {% endif %}
+      
+      <div class="text text-dark mt-5 mb-5 ml-5">
+      
+        <h2>Add Listing</h2>
 
         <form method="POST" action="{% url 'add_item' %}" enctype="multipart/form-data">
             {%csrf_token %}
