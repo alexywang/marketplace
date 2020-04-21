@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cart</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {%include 'bootstrap/bootstrap.html'%}
-    {%include 'navbar.html'%}
-    
+    <title>Cart</title>
+  </head>
+<body>
+  {%include 'navbar.html'%}
+  <div class="text text-dark mt-5 mb-5 ml-5">
     {%if order_failure%}
         <div class="alert alert-warning alert-dismissable fade show" role="alert">
             The order was not processed since one or more items in your cart is no longer in stock. Your cart has been updated.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
-        </div>    
+        </div>
     {%elif not valid_cart%}
         <div class="alert alert-danger alert-dismissable fade show" role="alert">
             One or more items have been removed from your cart because there was not enough stock remaining.
@@ -24,9 +26,9 @@
         </div>
     {%endif%}
 
-    <center><h1> My Cart </h1></center>
+    <h2 class="mb-3"> My Cart </h2>
     {%if not items%}
-        <center>Your cart is empty.</center>
+        <p>Your cart is empty.</p>
     {%else%}
         {%include 'display_items.html'%}
         Total Price: ${{total_price}}
@@ -37,7 +39,6 @@
         <input type="submit" value="Checkout">
     </form>
     {%endif%}
-
-  
+  </div>
 </body>
 </html>
