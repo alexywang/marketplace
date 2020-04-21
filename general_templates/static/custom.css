@@ -10,12 +10,7 @@
   border-color: black;
 }
 
-#signupsubmit:hover {
-  border: 1px solid black;
-  text-decoration: none;
-}
-
-#loginsubmit:hover {
+.submitbutton:hover {
   border: 1px solid black;
   text-decoration: none;
 }
