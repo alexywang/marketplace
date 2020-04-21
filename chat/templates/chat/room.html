@@ -51,7 +51,7 @@
     };
 
     function fetchMessages(){
-        chatSocket.send(JSON.stringify({'command':'fetch_messages'}));
+        chatSocket.send(JSON.stringify({'command':'fetch_messages','room_name':roomName}));
     }
 
     //Add to the chat log 
@@ -86,7 +86,9 @@
         chatSocket.send(JSON.stringify({
             'command': 'new_message',
             'message': message,
-            'from': username
+            'from': username,
+            'room_name':roomName
+
         }));
 
         messageInputDom.value = '';

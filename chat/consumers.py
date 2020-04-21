@@ -3,14 +3,26 @@ from channels.generic.websocket import WebsocketConsumer
 import json
 from channels.auth import get_user, logout
 from django.contrib.auth.models import User
-from .models import Message
+from .models import Message,Chat
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 
 class ChatConsumer(WebsocketConsumer):
+   
+    def create_room(self,room_name):
+        Chat.objects.create(room_name=room_name)
     
     def fetch_messages(self,data):
-        messages=Message.last_10_messages()
+        chat=None
+        try:
+            chat=Chat.objects.get(room_name=data['room_name'])
+        except Chat.DoesNotExist:
+            self.create_room(data['room_name'])
+            chat=Chat.objects.get(room_name=data['room_name'])
+        
+        messages=chat.last_15_messages()
+        
         content={
             'command':'messages',
             'messages':self.messages_to_json(messages)
@@ -20,11 +32,16 @@ class ChatConsumer(WebsocketConsumer):
     def new_message(self,data):
         author=data['from']
         author_user=User.objects.filter(username=author)[0]
-        
+    
         message=Message.objects.create(
             author=author_user,
             content=data['message']
         )
+        
+        current_chat=Chat.objects.get(room_name=data['room_name'])
+        current_chat.messages.add(message)
+        current_chat.save()
+        
         content={
             'command':'new_message',
             'message':self.message_to_json(message)
@@ -106,6 +123,9 @@ class ChatConsumer(WebsocketConsumer):
     def chat_message(self, event):
         message = event['message']
         self.send(text_data=json.dumps(message))
+    
+    
+        
     
     # Receive message from username group
     #def logout_message(self, event):

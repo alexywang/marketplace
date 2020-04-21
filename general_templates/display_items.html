@@ -30,12 +30,14 @@
                                      {% comment %} Give actions for your own item  {% endcomment %}
                                         <button class ="btn btn-primary" onclick="window.location.href='{%url 'edit_item' pk=item.item_id%}'">Edit Listing </button>
                                         <button class ="btn btn-danger" onclick="window.location.href='{%url 'delete_item' pk=item.item_id%}'">Delete Listing</button>
+                                        <button class="btn " onclick="window.location.href='{% url 'room' item.item_id %}';"> Chat </button>
                                     {%else%}
                                         {%autoescape on%}
                                         <input type="number" id="quantity" value="0" min="0" max="{{item.quantity}}">
                                         <button id="add-cart-button" class="add-cart-button btn btn-primary" onclick="addToCart('{{item.item_id}}', '{%url 'add_to_cart'%}', '{{page_type}}')">Add to Cart</button>
                                         {% comment %} <button class="btn" onclick=""> More </button> {% endcomment %}
-                                        <button class="btn" onclick="window.location.href='{% url 'room' item.name %}';"> Chat </button>
+                                        <button class="btn " onclick="window.location.href='{% url 'room' item.item_id %}';"> Chat </button>
+                                        
                                         {% endautoescape %}
                                     {%endif%}
                                     </p>
