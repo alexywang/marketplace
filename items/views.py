@@ -24,11 +24,11 @@ def add_item(request):
    
    
 			return redirect('my_items')
-		return HttpResponseBadRequest('Invalid Input')
+		#return HttpResponseBadRequest('Invalid Input')
 	else:
 		form=ItemForm()
-		context['form']=form
-	
+		
+	context['form']=form
 	return render(request,'items/add_item.html',context)
 
  
@@ -47,11 +47,11 @@ def edit_item(request,pk=None):
                 form.save()
                 form.save_m2m()
                 return redirect('my_items')
-            return HttpResponseBadRequest('Invalid Input')
+            #return HttpResponseBadRequest('Invalid Input')
         else:
             form=ItemForm(instance=item)
-            context['form']=form
-            return render(request,'items/edit_item.html',context)
+        context['form']=form
+        return render(request,'items/edit_item.html',context)
     else:
         return redirect('my_items')
             

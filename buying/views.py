@@ -26,6 +26,8 @@ def add_to_cart(request):
         return HttpResponseBadRequest("sold")
     elif item.seller == request.user.userprofile:
         return HttpResponseBadRequest("ownitem")
+    elif item.quantity<0:
+        return HttpResponseBadRequest("invalidquantity")
 
     # Item exists, update cart and return success response
     user = request.user.userprofile
@@ -135,7 +137,7 @@ def get_cart(request):
 
             # Add to seller's orders
             if order.item.seller.user.email in sellers.keys():
-                sellers[order.item.user.email].append(order)
+                sellers[order.item.seller.user.email].append(order)
             else:
                 sellers[order.item.seller.user.email] = [order]
 

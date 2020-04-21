@@ -43,6 +43,8 @@ function addToCart(itemId, addCartUrl, pageType){
                 notification = 'You are not logged in.';
             }else if(response.responseText == 'noquantity'){
                 notification = 'Quantity must be at least 1 to add to cart.'
+            }else if(response.responseText=='invalidquantity'){
+                notification='Negative Quanities are not allowed.'
             }else{
                 notification = response.responseText;
             }
