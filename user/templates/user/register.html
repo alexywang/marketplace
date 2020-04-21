@@ -13,7 +13,7 @@
         {% for field in user_form %}
             {% for error in field.errors %}
                 <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
+                    <strong>{{field.name }} : {{ error|escape }}</strong>
                 </div>
             {% endfor %}
         {% endfor %}
@@ -23,12 +23,12 @@
             </div>
         {% endfor %}
       {% endif %}
-      
+
       {% if profile_form.errors %}
       {% for field in profile_form %}
           {% for error in field.errors %}
               <div class="alert alert-danger">
-                  <strong>{{ error|escape }}</strong>
+                  <strong>{{field.name }} : {{ error|escape }}</strong>
               </div>
           {% endfor %}
       {% endfor %}
