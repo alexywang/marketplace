@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.utils.safestring import mark_safe
+from items.models import Item
 import json
 
 
@@ -10,9 +11,11 @@ def index(request):
 
 @login_required
 def room(request, room_name=None):
+    item =Item.objects.get(item_id=room_name)
     context={
         'room_name': mark_safe(json.dumps(room_name)),
-        'username': mark_safe(json.dumps(request.user.username))                      
+        'username': mark_safe(json.dumps(request.user.username)),
+        'item':item                     
     }
     return render(request, 'chat/room.html', context)
 

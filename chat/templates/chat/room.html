@@ -3,11 +3,12 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Chat Room</title>
+    <title>Chat Room: {{item.name}}</title>
 </head>
 <body>
     {%include 'navbar.html'%}
     <div class="messages"> 
+        <h1>Messages about: {{item.name}}</h1>
         <ul id="chat-log" ">
 
         </ul>

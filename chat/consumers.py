@@ -9,10 +9,11 @@ from django.shortcuts import get_object_or_404
 
 
 class ChatConsumer(WebsocketConsumer):
-   
+    #creates room
     def create_room(self,room_name):
         Chat.objects.create(room_name=room_name)
     
+    #Returns messages from database 
     def fetch_messages(self,data):
         chat=None
         try:
@@ -21,14 +22,15 @@ class ChatConsumer(WebsocketConsumer):
             self.create_room(data['room_name'])
             chat=Chat.objects.get(room_name=data['room_name'])
         
+        #Get last 15 messages 
         messages=chat.last_15_messages()
-        
         content={
             'command':'messages',
             'messages':self.messages_to_json(messages)
         }
         self.send_message(content)
     
+    #save new message to database 
     def new_message(self,data):
         author=data['from']
         author_user=User.objects.filter(username=author)[0]
@@ -38,6 +40,7 @@ class ChatConsumer(WebsocketConsumer):
             content=data['message']
         )
         
+        #add message to log
         current_chat=Chat.objects.get(room_name=data['room_name'])
         current_chat.messages.add(message)
         current_chat.save()
@@ -61,13 +64,14 @@ class ChatConsumer(WebsocketConsumer):
             'timestamp':str(message.timestamp)
         }
     
-    
+    #functions that can be called 
     commands={
         'fetch_messages':fetch_messages,
         'new_message': new_message
         
     }
-        
+    
+    #connect to room     
     def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
@@ -119,7 +123,7 @@ class ChatConsumer(WebsocketConsumer):
     def send_message(self,message):
         self.send(text_data=json.dumps(message))
 
-  
+    #this isnt being used 
     def chat_message(self, event):
         message = event['message']
         self.send(text_data=json.dumps(message))
@@ -128,8 +132,5 @@ class ChatConsumer(WebsocketConsumer):
         
     
     # Receive message from username group
-    #def logout_message(self, event):
-    #    self.send(text_data=json.dumps({
-    #        'message': event['message']
-    #    }))
-    #    self.close()
+    def logout_message(self, event):
+        self.close()
