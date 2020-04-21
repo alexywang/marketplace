@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Edit Item</title>
-    </head>
-    
-    <body>
-        {%include 'navbar.html'%}
-        {%include 'bootstrap/bootstrap.html'%}
-        
-        <h1>Edit Item</h1>
-        <form method="POST" enctype="multipart/form-data">
-            {%csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Edit Item">
-        </form>
-         <h1> {{form.errors}}</h1>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>Edit Items</title>
+  </head>
+  <body>
+    {%include 'navbar.html'%}
+    <div class="text text-dark mt-5 ml-5">
+      <h2>Edit Item</h2>
+      <form method="POST" enctype="multipart/form-data">
+          {%csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" value="Edit Item">
+      </form>
+      <h2> {{form.errors}}</h2>
+     </div>
+  </body>
 
 </html>
