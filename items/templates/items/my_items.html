@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>My Items</title>
-    </head>
-    
-    <body>
-        {%include 'navbar.html'%}
-        {%include 'bootstrap/bootstrap.html'%}
-        <center><h1>My Items</h1></center>
-        {%if not items %}
-            <h1>You have not posted any items.</h1>
-        {% else %}
-            {%include 'display_items.html'%}
-        {% endif %}
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>My Items</title>
+  </head>
+  <body>
+    {%include 'navbar.html'%}
+    <div class="text text-dark mt-5 ml-5">
+      <h2 class="mb-3">My Items</h2>
+      {%if not items %}
+          <p>You have not yet posted any items.</p>
+      {% else %}
+          {%include 'display_items.html'%}
+      {% endif %}
+    </div>
+  </body>
 
 </html>
