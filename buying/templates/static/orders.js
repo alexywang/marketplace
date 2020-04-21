@@ -19,7 +19,7 @@ function generateOrderHTML(order, type){
     let date = order.date;
     let image = order.item.image;
     let item = order.item;
-
+    console.log(shipping)
 
     // Dynamic fields
     let user = ''
@@ -44,6 +44,7 @@ function generateOrderHTML(order, type){
                 <p><strong>Amount Paid: </strong>$${price}</p>
                 <p><strong>Quantity: </strong>${quantity}</p>
                 <p><strong>Date: </strong>${date}</p>
+                <p><strong>Shipping: </strong>${shipping}</p>
 
             </div>
 
