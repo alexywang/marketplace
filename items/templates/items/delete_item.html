@@ -1,33 +1,34 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Delete Item</title>
-    </head>
-    
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>Delete Item</title>
+  </head>
     <body>
-        {%include 'navbar.html'%}
-        {%include 'bootstrap/bootstrap.html'%}
-        
+      {%include 'navbar.html'%}
+      <div class="text text-dark mt-5 ml-5">
         <h1>Delete Item</h1>
-       
+
         {% if item %}
-        <section style="padding: 20px;"> 
+        <section style="padding: 20px;">
             <li><b>Name: {{item.name}}</b></li>
             <li>description: {{item.description}}</li>
             <li>Price: ${{item.price}}</li>
             <li>Quantity: {{item.quantity}}</li>
-           
-           
+
+
             {% for category in item.category.all %}
                 <li> Category: {{category.name}}</li>
             {% endfor %}
-           
+
             {% if item.image %}
             <img src="{{item.image.url}}" width="200px" height="200px">
             {% endif %}
-           
-        </section>  
+
+        </section>
         {% endif %}
         <form method="POST" enctype="multipart/form-data">
             {%csrf_token %}
@@ -35,7 +36,7 @@
             <input type="checkbox" value="confirm" name="confirm" required>
             <input type="submit" value="Delete Item">
         </form>
-        
+      </div>
     </body>
 
 </html>
