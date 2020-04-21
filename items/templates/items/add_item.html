@@ -1,22 +1,24 @@
-
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Add Item</title>
-    </head>
-    
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>Add Item</title>
+  </head>
     <body>
-        {%include 'navbar.html'%}
-        {%include 'bootstrap/bootstrap.html'%}
-        <h1>Add Item</h1>
+      {%include 'navbar.html'%}
+      <div class="text text-dark mt-5 mb-5 ml-5">
+        <h2>Add Item</h2>
         <form method="POST" action="{% url 'add_item' %}" enctype="multipart/form-data">
             {%csrf_token %}
             {{ form.as_p }}
-          
+
             <input type="submit" value="Add Item">
         </form>
-         <h1> {{form.errors}}</h1>
+         <h2> {{form.errors}}</h2>
+       </div>
     </body>
 
 </html>
