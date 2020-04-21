@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {%include 'bootstrap/bootstrap.html'%}
-    <title>Add Item</title>
+    <title>Add Listing</title>
   </head>
     <body>
       {%include 'navbar.html'%}
       <div class="text text-dark mt-5 mb-5 ml-5">
+
         
         
         {% if form.errors %}
@@ -29,6 +30,7 @@
        
       
       <h2>Add Item</h2>
+
         <form method="POST" action="{% url 'add_item' %}" enctype="multipart/form-data">
             {%csrf_token %}
             {{ form.as_p }}
