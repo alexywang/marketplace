@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Listings</title>
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>Listings</title>
+  </head>
     <body>
-        {%include 'navbar.html'%}
-        {%include 'bootstrap/bootstrap.html'%}
+      {%include 'navbar.html'%}
+      <div class="text text-dark mt-5 ml-5">
         {%if not items%}
             There are currently no listings.
         {%else%}
@@ -22,8 +25,8 @@
                         <img src="{{item.image.url}}" width="200px" height="200px">
                         {% endif %}
                 </section>
-
             {%endfor%}
         {%endif%}
+      </div>
     </body>
 </html>
