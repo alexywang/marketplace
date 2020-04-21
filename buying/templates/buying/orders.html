@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%include 'bootstrap/bootstrap.html'%}
+    <title>Orders</title>
+  </head>
     <body>
-        {%include 'bootstrap/bootstrap.html'%}
-        {%include 'navbar.html'%}
+      {%include 'navbar.html'%}
+      <div class="text text-dark mt-5 mb-5 ml-5">
         {%load static%}
         <script src={%static 'orders.js'%}></script>
-        
-        <h1> Purchased By You </h1>
-        <a href="#my-purchases" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="my-purchases">
+
+        <h2 class="mb-3"> Purchased By You </h2>
+        <a class="text-dark submitbutton" href="#my-purchases" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="my-purchases">
         Show/Hide All
         </a>
-        <ul id="my-purchases" class="list-group collapse show">
+        <ul id="my-purchases" class="list-group collapse show mt-3">
             <script>
                 displayOrders(JSON.parse('{{my_purchases | escapejs}}'), 'my-purchases')
             </script>
         </ul>
-       
-        <h1> Purchased From You </h1>
-        <a href="#my-orders" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="my-orders">
+
+        <h2 class="mt-5 mb-3"> Purchased From You </h2>
+        <a class="text-dark submitbutton" href="#my-orders" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="my-orders">
         Show/Hide All
         </a>
-        <ul id="my-orders" class="list-group collapse show">
+        <ul id="my-orders" class="list-group collapse show mt-3">
             <script>
                 displayOrders(JSON.parse('{{my_orders | escapejs}}'), 'my-orders')
             </script>
         </ul>
-
-
+      </div>
     </body>
 </html>
