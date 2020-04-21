@@ -59,6 +59,11 @@
           var author = data['author'];
           var msgListTag=document.createElement('li');
           var pTag= document.createElement('p');
+          if("{{item.seller}}"==username){
+              author=author+"(Seller)"
+              msgListTag.setAttribute("name","seller");
+          }
+          
           pTag.textContent=author + ": "+ data.content;
 
           if(author===username){
