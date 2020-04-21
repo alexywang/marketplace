@@ -23,8 +23,8 @@
             <input type="hidden" name="next" value="{{request.GET.next}}">
           {%endif%}
       </form>
-      <a class="p-2 text-dark" id="signupsubmit" href="{% url 'register'%}">Sign Up</a>
-        <a class="p-2 text-dark" id="signupsubmit" href="{%url 'password_reset'%}">Forgot Password</a>
+      <a class="p-2 text-dark submitbutton" href="{% url 'register'%}">Sign Up</a>
+      <a class="p-2 text-dark submitbutton" href="{%url 'password_reset'%}">Forgot Password</a>
     </div>
   </body>
 </html>
