@@ -10,15 +10,17 @@
   </head>
   <body>
     {%include 'navbar.html'%}
-    <div class="messages">
-        <h1>Messages about: {{item.name}}</h1>
-        <ul id="chat-log">
+    <div class="text text-dark mt-5 mb-5 ml-5">
+      <div class="messages">
+          <h1>Messages about: {{item.name}}</h1>
+          <ul id="chat-log">
 
-        </ul>
-    </div>
-    <div class="message-input">
-        <input id="chat-message-input" type="text" size="100"/><br/>
-        <input id="chat-message-submit" type="button" value="Send"/>
+          </ul>
+      </div>
+      <div class="message-input">
+          <input id="chat-message-input" type="text" size="100"/><br/>
+          <input id="chat-message-submit" type="button" value="Send"/>
+      </div>
     </div>
     <script src="{% static 'reconnecting-websocket.js'%}"></script>
     <script>
