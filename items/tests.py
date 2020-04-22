@@ -38,7 +38,7 @@ class JSONTestCase(TestCase):
                 quantity=item_id,
                 date_uploaded="2020-04-22"
             )
-            item_id += 1
+          #  item_id += 1
 
 
 

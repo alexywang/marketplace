@@ -19,7 +19,7 @@ class ProfileTestCase(TestCase):
         self.user.UserProfile=profile
         self.factory = RequestFactory()
     
-    #needs correct url 
+    
     def test_get_user_profile(self):
         request = self.factory.get('profile?username=I_Fxjcaoie')
         request.user=self.user
@@ -32,6 +32,9 @@ class ProfileTestCase(TestCase):
         
         self.assertEqual(True,correct_name)
     
+    
+
+
     def test_raise_404(self):
         request = self.factory.get('profile?username=FAIL')
         request.user=self.user
