@@ -90,10 +90,20 @@ def search_item(request):
     context = {}
     items=None
     query = request.GET.get('q','')
-    if query != '':
-        items = Item.objects.filter(name__contains=query)
-    context['items']=items
     context['query'] = query
+
+    # Get a list of users
+    if str(query).strip() != '':
+        # Get items that match the search by name and category
+        items = Item.objects.filter(name__contains=query) | Item.objects.filter(category__name=query)
+        context['items']=items
+
+        # Get users that match the query
+        users = UserProfile.objects.filter(user__username=query)
+        context['users'] = users
+
+
+
     return render(request, 'items/search_results.html', context)
 
 

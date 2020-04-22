@@ -10,15 +10,34 @@
 <body>
     {%include 'navbar.html'%}
     <div class="text text-dark mt-5 ml-5">
+      <center>
+        <h2>Search Results for <font color="Blue">"{{query}}"</font></h2>
+      </center>
+    
+    
+      <h3>Items</h3>
       {%if not items%}
       There are no listings that match your search.
 
       {%else%}
-      <h2>Search Results for <font color="Blue">"{{query}}"</font></h2>
 
       {%include 'display_items.html'%}
-
       {%endif%}
+      
+      <br><br>
+      
+      <h3>Users</h3>
+      {%if not users%}
+      There are no users that match your search.
+      {%else%}
+        {%for profile in users%}
+          <p>
+            <a href="{%url 'profile'%}?username={{profile.user.username}}"> {{profile.user.username}} </a>
+          </p>
+        {%endfor%}
+      {%endif%}
+
+      
     </div>
 </body>
 </html>
