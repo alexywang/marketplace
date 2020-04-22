@@ -89,17 +89,17 @@ def my_items(request):
 def search_item(request):
     context = {}
     items=None
-    query = request.GET.get('q','')
+    query = str(request.GET.get('q','')).lower()
     context['query'] = query
 
     # Get a list of users
     if str(query).strip() != '':
         # Get items that match the search by name and category
-        items = Item.objects.filter(name__contains=query) | Item.objects.filter(category__name=query)
+        items = Item.objects.filter(name__icontains=query) | Item.objects.filter(category__name__icontains=query)
         context['items']=items
 
         # Get users that match the query
-        users = UserProfile.objects.filter(user__username=query)
+        users = UserProfile.objects.filter(user__username__icontains=query)
         context['users'] = users
 
 

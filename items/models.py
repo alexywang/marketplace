@@ -1,6 +1,6 @@
 from django.db import models
 import user.models
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator,MinValueValidator
 
 def user_directory_path(instance, filename):
     return 'item_image/user_{0}/{1}'.format(instance.seller.id, filename)
@@ -19,7 +19,7 @@ class Item(models.Model):
     seller = models.ForeignKey(user.models.UserProfile, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, blank=True)
     price = models.DecimalField(max_digits=9, decimal_places=2)
-    quantity = models.IntegerField(default=1,validators=[MaxValueValidator(9999999999)])
+    quantity = models.IntegerField(default=1,validators=[MaxValueValidator(9999999999), MinValueValidator(1)])
     image= models.ImageField(upload_to=user_directory_path,default='item_image/default/No_Image.jpg') #python -m pip install Pillow (need this on server)
     category=models.ManyToManyField(Category)
     date_uploaded=models.DateField(auto_now=True)
