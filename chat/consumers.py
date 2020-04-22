@@ -81,13 +81,7 @@ class ChatConsumer(WebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
-        
-       # user = self.scope['user']
-       # if user.is_authenticated:
-       #   async_to_sync(self.channel_layer.group_add)(
-       #       user.username,
-       #       self.channel_name
-       #   )
+
 
         self.accept()
 
@@ -102,14 +96,6 @@ class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data):
         data = json.loads(text_data)
         self.commands[data['command']](self,data)
-        
-        #message = text_data_json['message']
-        #user = self.scope['user']
-        
-       # if user.is_authenticated:
-        #    message = user.username + ': ' + message
-        #else:
-        #    message = 'Anonymous: ' + message
     
     def send_chat_message(self,message):
         # Send message to room group
@@ -128,8 +114,6 @@ class ChatConsumer(WebsocketConsumer):
         message = event['message']
         self.send(text_data=json.dumps(message))
     
-    
-        
     
     # Receive message from username group
     def logout_message(self, event):
