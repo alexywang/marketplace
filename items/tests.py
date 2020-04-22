@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import Model
 import os
 from django.core.serializers import serialize
+from .models import * 
 
 from myutils.query_utils import query_to_json, get_field_names
 # Create your tests here.
@@ -51,6 +52,9 @@ class JSONTestCase(TestCase):
         print()
         print(expected_json)
         self.assertEquals(item_json, expected_json)
+
+class ItemTestCase(TestCase):
+
 
    
 

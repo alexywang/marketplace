@@ -20,10 +20,10 @@ from django.conf import settings
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetCompleteView, PasswordResetConfirmView
 
 urlpatterns = [
-    path('user/',include('user.urls')),
+    path('',include('user.urls')), #changed '/user' to ''
     path('buying/',include('buying.urls')),
     path('items/',include('items.urls')),
     path('admin/', admin.site.urls),
-    path('chat/',include('chat.urls')), #may need to add namespace later 
+    path('chat/',include('chat.urls')),  
     # path('password/', include('django.contrib.auth.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #this is only for development
