@@ -9,7 +9,9 @@ Instructions
 -------------------------------
 1. Additional packages required: six, simplejson, openssl, redis, channels, channels_redis, pillow, django  
 
-2. python3 manage.py runserver 
+2. Need to make sure a redis server is running 
+
+3. python3 manage.py runserver 
 
 
 I have created the following accounts for you to interact with our website(Since Mailgun free edition limits emails to only those that are manually entered as acceptable and we don't know your email beforehand) 
