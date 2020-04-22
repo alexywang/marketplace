@@ -7,13 +7,31 @@ Olivia Woodhouse 260734701
 
 Instructions
 -------------------------------
-1. Additonal packages required: six, simplejson, pillow,  
-2. Create super user using: python manage.py createsuperuser
-4. Delete all files in migration folders except _init_.py to start with a fresh database
-5. python manage.py sqlclear
-6. python manage.py makemigrations 
-7. python manage.py migrate 
-8. Go to localhost:8000/admin and use super user to populate the Category table with some category names (e.g. bed, table, chair)
-9. python manage.py runserver 
+1. Additional packages required: six, simplejson, openssl, redis, channels, channels_redis, pillow, django  
 
-Have fun 🙂
+2. python3 manage.py runserver 
+
+
+I have created the following accounts for you to interact with our website(Since Mailgun free edition limits emails to only those that are manually entered as acceptable and we don't know your email beforehand) 
+
+
+Username: admin --->has admin privileges 
+Password: Comp307!
+
+Username: test1
+Password: Comp307!
+
+Username: test2
+Password: Comp307!
+
+Username: test3
+Password: Comp307!
+
+Have fun 🙂!
+
+
+
+
+
+
+
