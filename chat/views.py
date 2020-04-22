@@ -5,9 +5,6 @@ from items.models import Item
 import json
 
 
-@login_required
-def index(request):
-    return render(request, 'chat/chat_index.html', {})
 
 @login_required
 def room(request, room_name=None):
