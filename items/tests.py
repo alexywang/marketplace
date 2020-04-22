@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import Model
 import os
 from django.core.serializers import serialize
-from .models import * 
+
 
 from myutils.query_utils import query_to_json, get_field_names
 # Create your tests here.
@@ -47,13 +47,13 @@ class JSONTestCase(TestCase):
         item_json = query_to_json(items, exclude_fields="password")
         expected_json = open(os.path.join(os.path.dirname(__file__), 'test_files/test_query_to_json_expected.txt'))
         expected_json = expected_json.read()
-        print()
-        print(item_json)
-        print()
-        print(expected_json)
         self.assertEquals(item_json, expected_json)
+    
+    #def searchByCategory 
 
-class ItemTestCase(TestCase):
+#class ItemTestCase(TestCase):
+ #   def setUp(self):
+        
 
 
    
