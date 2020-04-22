@@ -87,12 +87,14 @@ def my_items(request):
 
 # TODO: Update to a better search algorithm and should limit result size 
 def search_item(request):
-	context = {}
-	query = request.GET.get('q','')
-	items = Item.objects.filter(name__contains=query)
-	context['items']=items
-	context['query'] = query
-	return render(request, 'items/search_results.html', context)
+    context = {}
+    items=None
+    query = request.GET.get('q','')
+    if query != '':
+        items = Item.objects.filter(name__contains=query)
+    context['items']=items
+    context['query'] = query
+    return render(request, 'items/search_results.html', context)
 
 
 # # Get the solo page for an item

@@ -16,7 +16,7 @@ class JSONTestCase(TestCase):
         item_id = 1
         for i in range(1, 2):
             index = str(i)
-            user = User.objects.create_user('testusername'+index, 'testemail'+index, 'testpassword'+index)
+            user = User.objects.create_user('testusername'+index, 'testemail'+index, 'testpassword'+index,date_joined="2020-04-22 00:00:01")
             profile = UserProfile.objects.create(user=user, phone='testphone'+index)
             item = Item.objects.create(
                 item_id = item_id,
@@ -25,6 +25,7 @@ class JSONTestCase(TestCase):
                 description ='Description'+str(item_id),
                 price=item_id,
                 quantity=item_id,
+                date_uploaded="04/22/2020"
             )
             item_id += 1
             item2 = Item.objects.create(
@@ -34,6 +35,7 @@ class JSONTestCase(TestCase):
                 description='Description' + str(item_id),
                 price=item_id,
                 quantity=item_id,
+                date_uploaded="2020-04-22"
             )
             item_id += 1
 
@@ -44,8 +46,11 @@ class JSONTestCase(TestCase):
         item_json = query_to_json(items, exclude_fields="password")
         expected_json = open(os.path.join(os.path.dirname(__file__), 'test_files/test_query_to_json_expected.txt'))
         expected_json = expected_json.read()
+        print()
         print(item_json)
+        print()
+        print(expected_json)
         self.assertEquals(item_json, expected_json)
 
-    #TODO: Finish test case
+   
 

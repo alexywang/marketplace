@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect,HttpResponse,get_object_or_404
 from django.contrib.auth import authenticate,login,logout
 from user.forms import UserProfileForm, UserForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -131,7 +131,7 @@ def get_user(request):
     if request.method == 'GET':
         # Get user information
         target_username = request.GET['username']
-        target = User.objects.get(username=target_username)
+        target = get_object_or_404(User,username=target_username)
         context['username'] = target.username
         context['email'] = target.email
 
@@ -142,7 +142,7 @@ def get_user(request):
         return render(request, 'user/user_profile.html', context)
 
     else:
-        return HttpResponse('Wtf Post?')
+        return HttpResponse('Error')
 
 
 # Password reset

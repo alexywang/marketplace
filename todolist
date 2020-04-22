@@ -1,4 +1,0 @@
-
-- Search returns all items if empty string is used as search query
-    -> Search for items matching category, user, etc.
-- Dynamic solo listing page for all items (Maybe not needed)
